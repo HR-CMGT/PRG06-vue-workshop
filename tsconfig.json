@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "es2015",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true, // nodig voor @component in .vue templates
+        "target": "es2015"   // use target "es5" for compatibility with old browsers
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

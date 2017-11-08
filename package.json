@@ -1,0 +1,24 @@
+{
+  "name": "cmgt-vue-starter",
+  "version": "1.0.0",
+  "description": "Star template for Vue class-component with typescript",
+  "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "author": "HR CMGT",
+  "license": "ISC",
+  "dependencies": {
+    "css-loader": "^0.28.7",
+    "vue": "^2.5.2",
+    "vue-class-component": "^6.0.0",
+    "vue-loader": "^13.3.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-template-compiler": "^2.5.2"
+  },
+  "devDependencies": {
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1"
+  }
+}
