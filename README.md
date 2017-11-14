@@ -105,7 +105,7 @@ let myApp = new App({el: "#app"})
 
 ## Reactive data
 
-The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you use the following script to update your UI, every time our data has changed.
+The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you would have to call an update function manually, every time your state has changed:
 ```
 <div id="user"></div>
 function updateUI(){
