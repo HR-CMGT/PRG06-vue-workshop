@@ -117,9 +117,9 @@ function updateUI(){
 ```
 In a reactive framework, we use moustache syntax `{{ }}` to connect a variable directly to a DOM element.
 ```
-<div>{{ *variable* }}</div>
+<div>{{ variable }}</div>
 class App {
-    *variable* = "hello world"
+    variable = "hello world"
 }
 ```
 
