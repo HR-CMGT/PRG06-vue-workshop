@@ -54,13 +54,13 @@ A `.vue` file contains HTML, CSS and Code for one single component. This makes c
    div {border: 1px solid black;}
 </css>
 ```
-When compiling, webpack extracts these .vue files into separate script and css files, but we don't need to worry about that!
-
 ## Class syntax
 
-In this tutorial, we use class syntax to define our Vue components. HR CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript).
+In this tutorial, we use class syntax to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript).
 
-In Vue, we can create a component by extending (inheriting) the default Vue class. Data is defined as properties of the class. This example has a `name` as `data`, a custom method and a lifecycle method:
+In Vue, we can create a component by extending (*inheriting*) the default Vue class. A class can have properties and methods. *Note: in regular Javascript, component properties are stored in the `data` object*.
+
+Vue classes can have several `lifecycle` methods, such as `created()`. These are called automatically.
 
 ```
 <script lang="ts">
@@ -78,6 +78,10 @@ export default class App extends Vue {
 }
 </script>
 ```
+
+## Kickstarting the app
+
+Our first Vue component needs to be loaded when index.html is loaded, so we need to create an instance of our class in our entry file.
 
 ## Reactive data
 
@@ -110,6 +114,8 @@ export default class App extends Vue {
 ## But does it run?
 
 Run `webpack` in your terminal and open the page in localhost. For debugging, open the Vue inspector in Chrome.
+
+## Adding child components
 
 ## Adding Props
 
