@@ -12,7 +12,7 @@
 
 ## Installing
 
-Follow the instructions at Vue-starter!
+Follow the [installation instructions](https://github.com/HR-CMGT/vue-starter)
 
 ## Reading List
 
