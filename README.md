@@ -108,6 +108,7 @@ let myApp = new App({el: "#app"})
 The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you would have to call an update function manually, every time your state has changed:
 ```
 <div id="user"></div>
+// we have to keep track of changes in this.user.name and then call the update function
 function updateUI(){
    let element = document.getElementById("user")
    element.innerHTML = this.user.name
@@ -120,6 +121,7 @@ class App {
     variable = "hello world"
 }
 ```
+Now, the text in the `<div>` will reflect the value of `variable` automatically.
 
 Let's build a single file component with reactive data! In the `created` method, we change a variable over time to check if the connected DOM element automatically changes along:
 ```
