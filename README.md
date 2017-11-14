@@ -58,11 +58,23 @@ A `.vue` file contains HTML, CSS and Code for one single component. This makes c
 ```
 ## Class syntax
 
-In this tutorial, we use class syntax to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript).
+In this tutorial, we use class syntax to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
 
-In Vue, we can create a component by extending (*inheriting*) the default Vue class. A class can have properties and methods. *Note: in regular Javascript, component properties are stored in the `data` object*.
+As a reminder, a Typescript class is described and instantiated like this:
+```
+class App {
+    user: string = "erik"
+    login():void {
+        console.log("logged in as " + this.user);
+    }
+}
 
-Vue classes can have several `lifecycle` methods, such as `created()`. These are called automatically.
+let a = new App()
+```
+
+In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. 
+
+A class can have properties and methods. *Note: in regular Javascript, component properties are stored in the `data` object*.
 
 **app.vue**
 ```
