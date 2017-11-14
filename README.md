@@ -1,4 +1,4 @@
-# Vue Workshop
+# Vue Workshop part 1
 
 This guide explains how to work with Typescript single file components, using class syntax.
 - Class syntax makes a vue component much easier to read
@@ -14,8 +14,8 @@ Please note that using Class syntax is different from the default Javascript syn
 - Single file components
 - Class syntax
 - Reactive data
-- Adding Props
-- Adding Events
+- Clicks, styles and directives
+- Continuing with part 2
 - Reading list and documentation
 
 ## Installing
@@ -149,11 +149,17 @@ export default class App extends Vue {
 
 Run `webpack` in your terminal and open the page in localhost. For debugging, open the Vue inspector in Chrome.
 
-## Adding child components
+## Clicks, styles and directives
 
-## Adding Props
+We will check how to add button handlers to our templates, how to link css styles to variables, and how to use computed properties.
 
-## Adding Events
+## Vue Workshop part 2
+
+In part 2 we will look at:
+
+- Working with child components
+- Adding Props
+- Adding Events
 
 ## Reading List
 
