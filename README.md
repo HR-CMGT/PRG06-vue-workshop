@@ -1,10 +1,8 @@
-# Vue Workshop part 1
+# Vue Workshop
 
-This guide explains how to work with Typescript single file components, using class syntax.
-- Class syntax makes a vue component much easier to read
-- Typescript provides live error checking while typing in your IDE
+Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
 
-Please note that using Class syntax is different from the default Javascript syntax that is used in the [Vue Getting Started documentation](https://vuejs.org/v2/guide/)
+The workshop consists an installation guide, part 1 (this page) and part 2.
 
 ## Contents
 
@@ -91,7 +89,7 @@ export default class App extends Vue {
 }
 </script>
 ```
-*Note: if you are used to using Vue with Javascript, you might expect a `data` object, but in a class all properties are data*.
+*Please note that using Class syntax is different from the default Javascript syntax that is used in the [Vue Getting Started documentation](https://vuejs.org/v2/guide/). Read more about [Typescript Class components here](https://alligator.io/vuejs/typescript-class-components/)*.
 
 ## Kickstarting the app
 
