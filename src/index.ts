@@ -1,5 +1,3 @@
-import Vue, { ComponentOptions } from 'vue'
-import App from './components/app.vue'
+import App from "./components/App.vue";
 
-let opt:ComponentOptions<Vue> = {el : '#app'}
-new App(opt)
+new App({el: "#app"});

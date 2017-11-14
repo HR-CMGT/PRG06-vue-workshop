@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>Hello {{name}}{{exclamationMarks}}</div>
+        <div class="greeting">Hi there {{name}}{{exclamationMarks}}</div>
         <button @click="decrement">-</button>
         <button @click="increment">+</button>
     </div>
@@ -10,7 +10,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class Card extends Vue {
+export default class Block extends Vue {
     @Prop() name: string;
     @Prop() initialEnthusiasm: number;
 
@@ -32,7 +32,7 @@ export default class Card extends Vue {
 </script>
 
 <style scoped>
-div {
-    font-size: 30px;
+.greeting {
+    font-size: 20px;
 }
 </style>

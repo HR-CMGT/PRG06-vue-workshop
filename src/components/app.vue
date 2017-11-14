@@ -1,41 +1,32 @@
 <template>
-    <div>   
-        <card v-for="n in names" :name="n" :key="n"></card>
-    </div>   
+    <div>
+        <div>App {{name}}</div>
+        <block :name="name" :initialEnthusiasm="3"></block>
+        <card :name="name" :initialEnthusiasm="8"></card>
+    </div>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import { Component, Prop } from 'vue-property-decorator'
-    import Card from "./card.vue"
-    import DataService from "../classes/dataservice"
+import { Vue, Component, Prop } from "vue-property-decorator";
+import Card from "./Card.vue";
+import Block from "./Block.vue";
 
-    @Component({
-        components: {Card}
-    })
-
-    export default class App extends Vue {
-        names:string[] = ["erik", "bob"]
-        created() {
-            let ds = new DataService()
-            ds.getData("https://swapi.co/api/people/1/").then(data => this.dataLoaded(data))
-        }
-		dataLoaded(a:Actor){
-            console.log("actor name is " + a.name)
-            console.log(a)
-        }
-    }
-    
+@Component({
+    components: {Block, Card}
+})
+export default class App extends Vue {
+    name: string = "henk";
+}
 </script>
 
 <style>
-    body {
-        font-family: sans-serif;
-        background-color: #ccc;
-        margin:0px; padding:0px;
-    }
+body {
+    font-family: sans-serif;
+    background-color: #ccc;
+    margin:0px; padding:0px;
+}
 
-    div {
-        box-sizing: border-box;
-    }
+div {
+    box-sizing: border-box;
+}
 </style>
