@@ -3,7 +3,8 @@
 This guide explains how to work with Typescript single file components, using class syntax.
 - Class syntax makes a vue component much easier to read
 - Typescript provides live error checking while typing in your IDE
-Please note that this syntax is different from the default Javascript syntax that is used in the [Vue Getting Started documentation](https://vuejs.org/v2/guide/)
+
+Please note that using Class syntax is different from the default Javascript syntax that is used in the [Vue Getting Started documentation](https://vuejs.org/v2/guide/)
 
 ## Contents
 
