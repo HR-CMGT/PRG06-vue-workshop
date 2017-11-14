@@ -153,6 +153,20 @@ Run `webpack` in your terminal and open the page in localhost. For debugging, op
 
 We will check how to add button handlers to our templates, how to link css styles to variables, and how to use computed properties.
 
+### Clicks
+
+
+
+### Variable styles
+
+Let's create a box that turns red when a variable is false, and green when the variable is true.
+
+When your comparison code becomes too complex you can put the code in the class, and reference it as a `computed property`.
+
+### Directives
+
+We are going to show an entire `div` only when a variable is true, and we are going to render a whole list of divs depending on the number of variables in an array.
+
 ## Vue Workshop part 2
 
 In part 2 we will look at:
@@ -160,6 +174,7 @@ In part 2 we will look at:
 - Working with child components
 - Adding Props
 - Adding Events
+- Input field and model
 
 ## Reading List
 
