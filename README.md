@@ -23,3 +23,4 @@ Follow the instructions at Vue-starter!
 - [Vue Class Component on github](https://github.com/vuejs/vue-class-component)
 - [Vue documentation: typescript support](https://vuejs.org/v2/guide/typescript.html)
 - [Using Vue components without Webpack](https://vuejsdevelopers.com/2017/09/24/vue-js-single-file-javascript-components/)
+- [Microsoft Typescript Vue Starter](https://github.com/Microsoft/TypeScript-Vue-Starter)
