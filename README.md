@@ -72,9 +72,7 @@ class App {
 let a = new App()
 ```
 
-In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. 
-
-A class can have properties and methods. *Note: in regular Javascript, component properties are stored in the `data` object*.
+In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. A class can have properties and methods. 
 
 **app.vue**
 ```
@@ -93,6 +91,7 @@ export default class App extends Vue {
 }
 </script>
 ```
+*Note: if you are used to using Vue with Javascript, you might expect a `data` object, but in a class all properties are data*.
 
 ## Kickstarting the app
 
@@ -108,11 +107,23 @@ let myApp = new App({el: "#app"})
 
 ## Reactive data
 
-So far, we could have done all this with regular Typescript. The strength of Vue is that it we can bind our interface elements directly to the data in our components. This is called **reactive data**. 
+The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you use the following script to update your UI, every time our data has changed.
+```
+// call updateUI every time something has changed in our app state
+function updateUI(){
+   let element = document.getElementById("user")
+   element.innerHTML = this.user.name
+}
+```
+In a reactive framework, we use moustache syntax `{{ }}` to connect a variable directly to a DOM element.
+```
+<div>{{ *variable* }}</div>
+class App {
+    *variable* = "hello world"
+}
+```
 
-To connect the data of our component to our DOM elements, we use moustache syntax: `<div>{{ variable }}</div>`. Let's build a single file component with reactive data. In the `created` method, we change the name over time. You will see that the DOM element automatically changes along.
-
-We no longer need to access the DOM manually by using `element = document.getElementById()` and `element.innerHTML = name`!
+Let's build a single file component with reactive data! In the `created` method, we change a variable over time to check if the connected DOM element automatically changes along:
 ```
 <template>
    <div>Hello {{ name }}</div>
