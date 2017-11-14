@@ -95,12 +95,16 @@ export default class App extends Vue {
 
 We now have an App class, but no instance. We can create our app instance in the entry file of our app: `index.ts`. *(The entry file of our application is configured in `webpack.config.js`).*
 
+**index.html**
+```
+<div id="app"></div>
+```
+
 **index.ts**
 ```
-import Vue from "vue"
 import App from "./components/App.vue"
 
-let myApp = new App({el: "#app"})
+new App({el: "#app"})
 ```
 
 ## Reactive data
