@@ -32,7 +32,6 @@ A Vue component is a DOM element that can have data and interactivity. A Vue com
 
 - **data**: data contains the state of your component. For example: `user = "erik"`
 - **methods**: actions that your component can execute, for example: `loadStarWarsData()`
-- **lifecycle**: Each Vue component has a number of default methods, called [lifecycle hooks](https://vuejs.org/v2/guide/instance.html).  
 
 As we have seen in the presentation, a component can have child components, creating a hierarchy. Child components can have:
 
@@ -42,6 +41,8 @@ As we have seen in the presentation, a component can have child components, crea
 ## Single file components
 
 A `.vue` file contains HTML, CSS and Code for one single component. This makes components easily reusable and prevents spaghetti code.
+
+**app.vue**
 ```
 <template>
    <div>Hello world</div>
@@ -63,6 +64,7 @@ In Vue, we can create a component by extending (*inheriting*) the default Vue cl
 
 Vue classes can have several `lifecycle` methods, such as `created()`. These are called automatically.
 
+**app.vue**
 ```
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
@@ -82,7 +84,15 @@ export default class App extends Vue {
 
 ## Kickstarting the app
 
-Our first Vue component needs to be loaded when index.html is loaded, so we need to create an instance of our class in our entry file.
+We now have an App class, but no instance. We can create our app instance in the entry file of our app: `index.ts`. *(The entry file of our application is configured in `webpack.config.js`).*
+
+**index.ts**
+```
+import Vue from "vue"
+import App from "./components/App.vue"
+
+let myApp = new App({el: "#app"})
+```
 
 ## Reactive data
 
