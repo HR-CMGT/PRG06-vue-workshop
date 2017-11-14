@@ -1,40 +1,33 @@
-# Vue Startproject
+# Installing tools
 
-This is an empty [Vue](https://vuejs.org) start project, configured to use:
-
-- Single file .vue templates
-- Webpack
-- Class syntax
-- Typescript
-
-After installing and checking if everything runs, you can continue with workshop 1 and workshop 2!
+After installing and checking if everything runs, you can continue with [workshop part 1](README.md) and [part 2](workshop2.md)!
 
 ## Contents
 
-- Installing
-- Running webpack
+- Tools
+- Using Webpack
 - Working with modules
 - Types for JSON data
 - Configuration files
 
-## Installing tools
+## Tools
 
-First install [Visual Studio Code](https://code.visualstudio.com) with the [Vetur extension](https://marketplace.visualstudio.com/items?itemName=octref.vetur) 
+First install [Visual Studio Code](https://code.visualstudio.com). To get code completion in Single File Components, install the [Vetur extension](https://marketplace.visualstudio.com/items?itemName=octref.vetur) 
 
 Make sure you have installed [NodeJS](https://nodejs.org/en/), and read [this introduction](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) if you are unfamiliar with npm.
 
-Install [Typescript](https://www.typescriptlang.org) and [Webpack](https://webpack.js.org) globally:
+Install [Typescript](https://www.typescriptlang.org) and [Webpack](https://webpack.js.org) **globally**
 
 ```
 sudo npm install -g typescript webpack
 ```
-For debugging, you can install the [Chrome Vue Developer tool](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd).
+For debugging Vue components, install the [Chrome Vue Developer tool](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd).
 
-## Installing the project
+## Installing the workshop files
 
-Open a terminal in your projects folder. Clone this repository, install dependencies, and open VS Code
+Open a terminal in your projects folder. Clone this repository, install dependencies, and open VS Code. If you are unfamiliar with git, you can do this [short exercise](https://try.github.io/levels/1/challenges/1)!
 ```
-git clone https://github.com/HR-CMGT/vue-starter.git
+git clone https://github.com/HR-CMGT/vue-workshop.git
 cd vue-starter
 npm install
 code .
@@ -46,7 +39,7 @@ Open VS Code's integrated terminal and type:
 ```
 webpack
 ```
-This command creates a `bundle.js` file in your `dist` folder, generated from your .vue typescript files. If you type `webpack --watch` the bundle is created automatically after every change in your code
+This command creates a `build.js` file in your `dist` folder, generated from your .vue typescript files. If you type `webpack --watch` the bundle is created automatically after every change in your code.
 
 ## Viewing the project
 
@@ -58,7 +51,7 @@ webpack-dev-server
 
 ## Working with modules
 
-Since this project uses webpack, you can use modules for all your code, not just `.vue` templates:
+Not all your code has to be inside a `.vue` file - those are only useful for visual UI elements. You can still create regular `.ts` classes for other logic. Since we already have webpack you can use modules in your `.ts` files as well:
 
 **test.ts**
 ```
@@ -81,7 +74,7 @@ export default class App extends Vue {
 
 ## Types for JSON data
 
-`types.d.ts` contains type definitions. You can use this file to get type checking for any external data or libraries. Included is an example for using JSON data from "https://swapi.co/api/people/1/"
+Typescript declaration files contain type definitions. `vue-shims.d.ts` contains the definition for Vue, but you can add your own types as well. This is useful to get type checking for external data or libraries. Included is the example `starwars.d.ts`. This will give you type checking for data from "https://swapi.co/api/people/1/"
 
 ## Files
 

@@ -2,7 +2,7 @@
 
 Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
 
-The workshop consists an [installation guide](install.md), part 1 (this page) and [part 2](workshop2.md).
+The workshop consists of an [installation guide](install.md), part 1 (this page) and [part 2](workshop2.md).
 
 ## Contents
 
@@ -18,7 +18,7 @@ The workshop consists an [installation guide](install.md), part 1 (this page) an
 
 ## Installing
 
-Follow the [installation instructions](https://github.com/HR-CMGT/vue-starter)
+Follow the [installation guide](install.md)
 
 ## Vue Workflow
 
@@ -155,6 +155,7 @@ Run `webpack` in your terminal and open the page in localhost. For debugging, op
 
 ## Clicks, styles and directives
 
+Add Input field and model
 We will check how to add button handlers to our templates, how to link css styles to variables, and how to use computed properties.
 
 ### Clicks
@@ -178,7 +179,8 @@ In part 2 we will look at:
 - Working with child components
 - Adding Props
 - Adding Events
-- Input field and model
+- Loading JSON data
+- Vue Router
 
 ## Reading List
 
