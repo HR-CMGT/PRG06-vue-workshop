@@ -28,7 +28,7 @@ For debugging Vue components, install the [Chrome Vue Developer tool](https://ch
 Open a terminal in your projects folder. Clone this repository, install dependencies, and open VS Code. If you are unfamiliar with git, you can do this [short exercise](https://try.github.io/levels/1/challenges/1)!
 ```
 git clone https://github.com/HR-CMGT/vue-workshop.git
-cd vue-starter
+cd vue-workshop
 npm install
 code .
 ```
