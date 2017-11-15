@@ -8,7 +8,7 @@ The workshop consists of an [installation guide](./presentation/install.md), par
 
 - Installing
 - Vue Workflow
-- What is a Vue component
+- What are we going to build?
 - Single file components
 - Class syntax
 - Reactive data
@@ -24,13 +24,15 @@ Follow the [installation guide](./presentation/install.md)
 
 Study the [Vue Workflow presentation](./presentation/workflow.md)
 
-## What is a Vue component
+## What are we going to build?
 
-A Vue component is a DOM element that can have data and interactivity. A Vue component can respond very fast to changes in the state of your app. When you declare a Vue component, you will add **data** (the state of your app) and **methods**. Then you will create **bindings** between UI elements and your data. You will design how your data flows through your components, using **props** and **events**.
+We will use `.vue` templates to define the HTML, CSS and code of our Vue components. We will add **state** (the data of our app) and we will **bind** UI elements to our state. 
+
+In part 2 of the workshop we will add child components and think about how our data flows through our app.
 
 ## Single file components
 
-A `.vue` file contains HTML, CSS and Code for one single component. This makes components easily reusable and prevents spaghetti code.
+We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
 
 **app.vue**
 ```
@@ -42,15 +44,19 @@ A `.vue` file contains HTML, CSS and Code for one single component. This makes c
    // our vue component code goes here
 </script>
 
-<css>
+<css scoped>
    div {border: 1px solid black;}
 </css>
 ```
+*note that the CSS is scoped. This means that these css rules only apply to the HTML template in the same .vue file*
+
 ## Class syntax
 
 In this tutorial, we use class syntax to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
 
 As a reminder, a Typescript class is described and instantiated like this:
+
+**app.ts**
 ```
 class App {
     user: string = "erik"
@@ -99,27 +105,36 @@ import App from "./components/App.vue"
 new App({el: "#app"})
 ```
 
+## But does it run?
+
+Run `webpack` in your terminal and open the page in localhost. For debugging, open the Vue inspector in Chrome.
+
 ## Reactive data
 
 The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you would have to call an update function manually, every time your state has changed:
+
+**app.js - no framework**
 ```
 <div id="user"></div>
-// we have to keep track of changes in this.user.name and then call the update function
-function updateUI(){
+function updateUI(){                // we have to call this manually when the state changes
    let element = document.getElementById("user")
-   element.innerHTML = this.user.name
+   element.innerHTML = this.name
 }
 ```
-In a reactive framework, we use moustache syntax `{{ }}` to connect a variable directly to a DOM element.
+In a reactive framework, we use moustache syntax `{{ }}` to connect our state directly to a DOM element.
+
+**app.vue - reactive framework**
 ```
 <div>{{ variable }}</div>
 class App {
     variable = "hello world"
 }
 ```
-Now, the text in the `<div>` will reflect the value of `variable` automatically.
+Now, the text in the `<div>` will reflect the value of `variable` automatically!
 
-Let's build a single file component with reactive data! In the `created` method, we change a variable over time to check if the connected DOM element automatically changes along:
+Let's build a single file component with reactive data! In the `created` method, we change a variable over time to check if the connected DOM element automatically changes along.
+
+**app.vue**
 ```
 <template>
    <div>Hello {{ name }}</div>
@@ -140,29 +155,70 @@ export default class App extends Vue {
 }
 </script>
 ```
+Run `webpack` to check that the component automatically updates its UI.
 
-## But does it run?
+### Example code
 
-Run `webpack` in your terminal and open the page in localhost. For debugging, open the Vue inspector in Chrome.
+To improve readability, we will omit the `import` and `@component` code in the next few examples. But you still need to include them!
 
-## Clicks, styles and directives
+```
+export default class App extends Vue {
+    name: string = "example"
+}
+```
 
-Add Input field and model
-We will check how to add button handlers to our templates, how to link css styles to variables, and how to use computed properties.
+## Binding styles and responding to clicks
 
-### Clicks
+We are going to build a progress bar that changes its CSS style according to the number of button clicks. We can bind a style to a variable, an expression or a function:
+```
+<template>
+    <div :class="{ active: isActive }">The css of this div is bound to a variable</div>
+    <div :class="{ active: clicks > 3 }">The css of this div is bound to an expression</div>
+    <div :class="{ active: numClicks }">The css of this div is bound to an expression</div>
+</template>
+
+<script lang="ts">
+export default class App extends Vue {
+    isActive:boolean = true
+    clicks:number = 3
+    get numClicks(){
+        return true
+    }
+}
+
+// css
+.active {
+    background-color:red;
+}
+```
+
+### Detecting a click
+
+We can add `@click` to a DOM element to connect it to a handler in our Typescript class:
+```
+<template>
+   <div @click='divClicked'>Number of clicks is {{ clicks }}</div>
+</template>
+
+<script lang="ts">
+export default class App extends Vue {
+    clicks: number = 0
+    divClicked(){
+        this.clicks++;
+    }
+}
+</script>
+
+<css scoped>
+    div: {cursor:pointer;}
+</css>
+```
+
+## Loading and displaying JSON data
 
 
 
-### Variable styles
 
-Let's create a box that turns red when a variable is false, and green when the variable is true.
-
-When your comparison code becomes too complex you can put the code in the class, and reference it as a `computed property`.
-
-### Directives
-
-We are going to show an entire `div` only when a variable is true, and we are going to render a whole list of divs depending on the number of variables in an array.
 
 ## Vue Workshop part 2
 
@@ -171,8 +227,6 @@ In [part 2](./presentation/workshop2.md) we will look at:
 - Working with child components
 - Adding Props
 - Adding Events
-- Loading JSON data
-- Vue Router
 
 ## Reading List
 

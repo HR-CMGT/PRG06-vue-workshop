@@ -30,8 +30,6 @@ In this example, our component has data for a user, a login status, and a shoppi
 
 Child components can have their own state.
 
----
-
 ![flow4](flow4.png)
 
 A component can change its own state. In this example, clicking the **log out** button will change the loggedin state to false.
