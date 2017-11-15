@@ -65,3 +65,5 @@ The parent needs to have an event handler that decides what happens if the child
 You may have noticed that components only ever pass data DOWN to child components. This is called unilateral data flow. The only way to respond to changes in child components, is to listen to events.
 
 ![flow7](flow7.png)
+
+You made it! You can continue with [part 1 of the workshop](../README.md).
