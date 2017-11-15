@@ -26,15 +26,7 @@ Study the [Vue Workflow presentation](workflow.md)
 
 ## What is a Vue component
 
-A Vue component is a DOM element that can have data and interactivity. A Vue component can respond very fast to changes in the state of your app. When you declare a Vue component, you can add:
-
-- **data**: data contains the state of your component. For example: `user = "erik"`
-- **methods**: actions that your component can execute, for example: `loadStarWarsData()`
-
-As we have seen in the presentation, a component can have child components, creating a hierarchy. Child components can have:
-
-- **props**: information that the component receives from a parent component
-- **events**: information that the component broadcasts to parent components
+A Vue component is a DOM element that can have data and interactivity. A Vue component can respond very fast to changes in the state of your app. When you declare a Vue component, you will add **data** (the state of your app) and **methods**. Then you will create **bindings** between UI elements and your data. You will design how your data flows through your components, using **props** and **events**.
 
 ## Single file components
 
