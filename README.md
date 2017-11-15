@@ -2,7 +2,7 @@
 
 Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
 
-The workshop consists of an [installation guide](install.md), part 1 (this page) and [part 2](workshop2.md).
+The workshop consists of an [installation guide](./presentation/install.md), part 1 (this page) and [part 2](./presentation/workshop2.md).
 
 ## Contents
 
@@ -18,11 +18,11 @@ The workshop consists of an [installation guide](install.md), part 1 (this page)
 
 ## Installing
 
-Follow the [installation guide](install.md)
+Follow the [installation guide](./presentation/install.md)
 
 ## Vue Workflow
 
-Study the [Vue Workflow presentation](workflow.md)
+Study the [Vue Workflow presentation](./presentation/workflow.md)
 
 ## What is a Vue component
 
@@ -166,7 +166,7 @@ We are going to show an entire `div` only when a variable is true, and we are go
 
 ## Vue Workshop part 2
 
-In part 2 we will look at:
+In [part 2](./presentation/workshop2.md) we will look at:
 
 - Working with child components
 - Adding Props
