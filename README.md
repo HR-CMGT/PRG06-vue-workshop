@@ -12,9 +12,10 @@ The workshop consists of an [installation guide](./presentation/install.md), par
 - Single file components
 - Class syntax
 - Reactive data
-- Clicks, styles and directives
+- Loading JSON data
+- Styles and clicks
 - Continuing with part 2
-- Reading list and documentation
+- Reading list
 
 ## Installing
 
@@ -48,7 +49,7 @@ We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
    div {border: 1px solid black;}
 </css>
 ```
-*note that the CSS is scoped. This means that these css rules only apply to the HTML template in the same .vue file*
+*note that this CSS is scoped. This means that these css rules only apply to the HTML template in the same .vue file*
 
 ## Class syntax
 
@@ -81,9 +82,6 @@ export default class App extends Vue {
     sayHello() {
         console.log("hello " + this.name)
     }
-    created(){
-        console.log("this vue component was just created!")
-    }
 }
 </script>
 ```
@@ -101,8 +99,7 @@ We now have an App class, but no instance. We can create our app instance in the
 **index.ts**
 ```
 import App from "./components/App.vue"
-
-new App({el: "#app"})
+new App({el: "#app"})     // supply the id of the div that will hold our Vue app
 ```
 
 ## But does it run?
@@ -113,10 +110,10 @@ Run `webpack` in your terminal and open the page in localhost. For debugging, op
 
 The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you would have to call an update function manually, every time your state has changed:
 
-**app.js - no framework**
+**app.js - manually updating the DOM**
 ```
 <div id="user"></div>
-function updateUI(){                // we have to call this manually when the state changes
+function updateUI(){
    let element = document.getElementById("user")
    element.innerHTML = this.name
 }
@@ -130,9 +127,7 @@ class App {
     variable = "hello world"
 }
 ```
-Now, the text in the `<div>` will reflect the value of `variable` automatically!
-
-Let's build a single file component with reactive data! In the `created` method, we change a variable over time to check if the connected DOM element automatically changes along.
+Now, the text in the `<div>` will reflect the value of `variable` automatically! Let's try this by building a single file component with reactive data. In the `created` method, we start a timer that changes a variable over time. The UI should reflect this automatically.
 
 **app.vue**
 ```
@@ -155,34 +150,35 @@ export default class App extends Vue {
 }
 </script>
 ```
-Run `webpack` to check that the component automatically updates its UI.
+Run `webpack`. Does it work?
 
-### Example code
+*Note: to improve readability, we will omit the `import` and `@component` statements in the next few examples. But you still need to include them!*
 
-To improve readability, we will omit the `import` and `@component` code in the next few examples. But you still need to include them!
+## Loading JSON data
 
-```
-export default class App extends Vue {
-    name: string = "example"
-}
-```
+Since you have already built a RESTful API, you might want to use that data to populate your Vue components. [Read this guide on how to load and display data from your API](./presentation/loading.md)
 
-## Binding styles and responding to clicks
+## Styles and clicks
 
-We are going to build a progress bar that changes its CSS style according to the number of button clicks. We can bind a style to a variable, an expression or a function:
+This short code example shows how to respond to button clicks and how to bind a css style to a variable.
 ```
 <template>
+<div>
     <div :class="{ active: isActive }">The css of this div is bound to a variable</div>
-    <div :class="{ active: clicks > 3 }">The css of this div is bound to an expression</div>
-    <div :class="{ active: numClicks }">The css of this div is bound to an expression</div>
+    <div :class="{ active: enoughClicks }">The css of this div is bound to a function</div>
+    <div @click='divClicked'>Number of clicks is {{ clicks }}</div>
+</div>
 </template>
 
 <script lang="ts">
 export default class App extends Vue {
     isActive:boolean = true
     clicks:number = 3
-    get numClicks(){
+    get enoughClicks(){
         return true
+    }
+    divClicked(){
+        this.clicks++;
     }
 }
 
@@ -192,7 +188,7 @@ export default class App extends Vue {
 }
 ```
 
-### Detecting a click
+## Buttons
 
 We can add `@click` to a DOM element to connect it to a handler in our Typescript class:
 ```
@@ -213,12 +209,6 @@ export default class App extends Vue {
     div: {cursor:pointer;}
 </css>
 ```
-
-## Loading and displaying JSON data
-
-
-
-
 
 ## Vue Workshop part 2
 

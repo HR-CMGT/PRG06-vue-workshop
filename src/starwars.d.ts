@@ -1,5 +1,4 @@
-// this example shows how to get type checking
-// for JSON data from "https://swapi.co/api/people/1/"
+// actor "https://swapi.co/api/people/1/"
 declare type Actor = {
     name: string,
     height: string,
@@ -14,6 +13,24 @@ declare type Actor = {
     species: string[],
     vehicles: string[],
     starships: string[],
+    created: string,
+    edited: string,
+    url: string
+}
+
+// film "https://swapi.co/api/films/"
+declare type Film = {
+    title: string,
+    episode_id: number,
+    opening_crawl: string,
+    director: string,
+    producer: string,
+    release_date: string,
+    characters: Actor[],
+    planets: any[],
+    starships: any[],
+    vehicles: any[],
+    species: any[],
     created: string,
     edited: string,
     url: string

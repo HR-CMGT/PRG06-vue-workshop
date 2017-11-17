@@ -1,21 +1,27 @@
 <template>
     <div>
-        <div>App {{name}}</div>
-        <block :name="name" :initialEnthusiasm="3"></block>
-        <card :name="name" :initialEnthusiasm="8"></card>
+        <div>{{ title }}</div>
+        <div class="card" v-for="f in films" :key="f.episode_id">{{f.title}}</div>
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import Card from "./Card.vue";
-import Block from "./Block.vue";
 
-@Component({
-    components: {Block, Card}
-})
+@Component
 export default class App extends Vue {
-    name: string = "henk";
+    title: string = "Loading..."
+    films: Film[] = []
+    created(){
+        this.getStarWarsData().then(data => { 
+            this.films = data.results
+            this.title = "Star Wars Movies"
+        })
+    }
+    async getStarWarsData() : Promise<any> {
+        let res = await fetch("https://swapi.co/api/films/")
+        return await res.json()
+    }
 }
 </script>
 
@@ -28,5 +34,12 @@ body {
 
 div {
     box-sizing: border-box;
+}
+
+.card {
+    background-color:white;
+    padding:10px; margin:10px;
+    border-radius:10px;
+    
 }
 </style>

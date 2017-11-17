@@ -25,7 +25,7 @@ For debugging Vue components, install the [Chrome Vue Developer tool](https://ch
 
 ## Installing the workshop files
 
-Open a terminal in your projects folder. Clone this repository, install dependencies, and open VS Code. If you are unfamiliar with git, you can do this [short exercise](https://try.github.io/levels/1/challenges/1)!
+Open a terminal in your projects folder. Clone this repository, install dependencies, and open VS Code. If you are unfamiliar with git, you can do this [short exercise](https://try.github.io/levels/1/challenges/1). 
 ```
 git clone https://github.com/HR-CMGT/vue-workshop.git
 cd vue-workshop
@@ -33,17 +33,19 @@ npm install
 code .
 ```
 
-## Running webpack
+*Note : if you don't want to use git for this workshop you can remove the `.git` directory from the project folder: `rm -rf .git`. If you do want to use git, you have to change the remote url: `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`*
 
-Open VS Code's integrated terminal and type:
+## Using webpack
+
+Webpack's [config file](./webpack.config.js) is set up to interpret `.vue` files that use Typescript. Try if webpack runs correctly in the terminal:
 ```
 webpack
 ```
-This command creates a `build.js` file in your `dist` folder, generated from your .vue typescript files. If you type `webpack --watch` the bundle is created automatically after every change in your code.
+This should create a `build.js` file in your `dist` folder, generated from your .vue typescript files. If you type `webpack --watch` the bundle is created automatically after every change in your code.
 
 ## Viewing the project
 
-You have to view your project on a local server: `http://localhost/`. If you don't have a localhost server, you can use webpack dev server - this also automatically refreshes the browser after any change!
+You have to view your project on a local server: `http://localhost/`. If you don't have a localhost server, you can use [webpack dev server](https://www.npmjs.com/package/webpack-dev-server) - this is super handy because it automatically refreshes the browser after you update your code!
 ```
 sudo npm install webpack-dev-server -g
 webpack-dev-server
@@ -53,32 +55,28 @@ webpack-dev-server
 
 Not all your code has to be inside a `.vue` file - those are only useful for visual UI elements. You can still create regular `.ts` classes for other logic. Since we already have webpack you can use modules in your `.ts` files as well:
 
-**test.ts**
+**demo.ts**
 ```
-export default class Test {
-    doSomething(){
-        console.log("hello test")
+export default class DataLoader {
+    loadData(){
+        console.log("loading data...")
     }
 }
 ```
 **app.vue**
 ```
-import Test from "./test"
+import DataLoader from "./DataLoader"
 export default class App extends Vue {
     created() {
-        let t = new Test()
-        t.doSomething()
+        let dl = new DataLoader()
+        dl.loadData()
     }
 }
 ```
-
-## Types for JSON data
-
-Typescript declaration files contain type definitions. `vue-shims.d.ts` contains the definition for Vue, but you can add your own types as well. This is useful to get type checking for external data or libraries. Included is the example `starwars.d.ts`. This will give you type checking for data from "https://swapi.co/api/people/1/"
 
 ## Files
 
 - **tsconfig.json** This file decides how your typescript files should be interpreted
 - **webpack.config.js** This file is used by webpack to compose html, css and javascript from .vue files that use typescript.
 - **package.json** Contains dependencies. You don't need to push `node_modules` to github.
-- **types.d.ts** This makes sure that VS Code understands the `.vue` file type. You can put your own type declarations in here as well.
+- **vue-shim.d.ts** This makes sure that VS Code understands the `.vue` file type. You can put your own type declarations in here as well.
