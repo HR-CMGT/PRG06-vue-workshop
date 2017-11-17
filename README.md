@@ -108,7 +108,7 @@ Run `webpack` in your terminal and open the page in localhost. For debugging, op
 
 ## Reactive data
 
-The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**. As a comparison, without a reactive framework you would have to call an update function manually, every time your state has changed:
+In the old days, without a reactive framework, we had to call an update function every time our data changed:
 
 **app.js - manually updating the DOM**
 ```
@@ -118,6 +118,8 @@ function updateUI(){
    element.innerHTML = this.name
 }
 ```
+The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**.
+
 In a reactive framework, we use moustache syntax `{{ }}` to connect our state directly to a DOM element.
 
 **app.vue - reactive framework**
@@ -186,28 +188,6 @@ export default class App extends Vue {
 .active {
     background-color:red;
 }
-```
-
-## Buttons
-
-We can add `@click` to a DOM element to connect it to a handler in our Typescript class:
-```
-<template>
-   <div @click='divClicked'>Number of clicks is {{ clicks }}</div>
-</template>
-
-<script lang="ts">
-export default class App extends Vue {
-    clicks: number = 0
-    divClicked(){
-        this.clicks++;
-    }
-}
-</script>
-
-<css scoped>
-    div: {cursor:pointer;}
-</css>
 ```
 
 ## Vue Workshop part 2
