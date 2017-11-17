@@ -18,9 +18,9 @@ export default class App extends Vue {
 ```
 ## Displaying data
 
-The great thing about Vue is that we only need to assign the JSON results to a reactive variable to populate the UI. You can bind the `actors` array to a repeating DOM element with `v-for`. In this example Vue will render a `<div>` for every film in our Films array. These divs will be added at the moment that the async function returns data.
-*note that we need to supply a key, this should be a unique value, for example the movie's id*
+The great thing about Vue is that we only need to assign the JSON results to a reactive variable to populate the UI. You can bind the `actors` array to a repeating DOM element with `v-for`. 
 
+In this example Vue will render a `<div>` for every film in our Films array. These divs will be added at the moment that the async function returns data.
 ```
 <template>
     <div>
@@ -28,6 +28,7 @@ The great thing about Vue is that we only need to assign the JSON results to a r
     </div>
 </template>
 ```
+*note that we need to supply a key, this should be a unique value, for example the movie's id*
 
 ## JSON Type definitions
 
