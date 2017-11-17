@@ -8,7 +8,6 @@ The workshop consists of an [installation guide](./presentation/install.md), par
 
 - Installing
 - Vue Workflow
-- What are we going to build?
 - Single file components
 - Class syntax
 - Reactive data
@@ -24,12 +23,6 @@ Follow the [installation guide](./presentation/install.md)
 ## Vue Workflow
 
 Study the [Vue Workflow presentation](./presentation/workflow.md)
-
-## What are we going to build?
-
-We will use `.vue` templates to define the HTML, CSS and code of our Vue components. We will add **state** (the data of our app) and we will **bind** UI elements to our state. 
-
-In part 2 of the workshop we will add child components and think about how our data flows through our app.
 
 ## Single file components
 
