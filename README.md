@@ -2,8 +2,6 @@
 
 Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
 
-The workshop consists of an [installation guide](./presentation/install.md), [presentation](./presentation/workflow.md), part 1 (this page) and [part 2](./presentation/workshop2.md).
-
 ## Part 1
 
 - Installing
@@ -12,7 +10,8 @@ The workshop consists of an [installation guide](./presentation/install.md), [pr
 - Class syntax
 - Reactive data
 - Loading JSON data
-- Styles and clicks
+- Clicks and conditionals
+- Styles
 - Continuing with part 2
 - Reading list
 
@@ -22,7 +21,7 @@ Follow the [installation guide](./presentation/install.md)
 
 ## Vue Workflow
 
-Study the [Vue Workflow presentation](./presentation/workflow.md)
+Study the [Vue Workflow](./presentation/workflow.md)
 
 ## Single file components
 
@@ -31,11 +30,11 @@ We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
 **app.vue**
 ```
 <template>
-   <div>Hello world</div>
+   <div>HTML markup goes here</div>
 </template>
 
 <script lang="ts">
-   // our vue component code goes here
+   console.log("typescript code goes here")
 </script>
 
 <css scoped>
@@ -46,7 +45,7 @@ We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
 
 ## Class syntax
 
-In this tutorial, we use class syntax to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
+In this tutorial, we use *class syntax* to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
 
 As a reminder, a Typescript class is described and instantiated like this:
 
@@ -60,11 +59,10 @@ class App {
 }
 
 let a = new App()
+a.login()
 ```
 
-In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. 
-
-A class can have state and methods. In this example the state holds a 'name' and the method is 'sayHello'.
+In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. We can add state to the component by adding class properties:
 
 **app.vue**
 ```
@@ -80,11 +78,11 @@ export default class App extends Vue {
 }
 </script>
 ```
-*When using Class syntax you don't need a `data` and a `methods` object, like you do in a [default Javascript Vue project](https://vuejs.org/v2/guide/). Read more about [Typescript Class components here](https://alligator.io/vuejs/typescript-class-components/)*.
+*If you are familiar with [Vue in Javascript](https://vuejs.org/v2/guide/), you might expect a `data` and a `methods` object, but we don't need those when using [class syntax](https://alligator.io/vuejs/typescript-class-components/)*.
 
 ## Kickstarting the app
 
-We now have an App class, but no instance. We can create our app instance in the entry file of our app: `index.ts`. *The entry file of our application is configured in `webpack.config.js`.*
+We now have an App class, but no instance. We have to instantiate our app in `index.ts`. *The entry file of an application is configured in `webpack.config.js`.*
 
 **index.html**
 ```
@@ -94,7 +92,7 @@ We now have an App class, but no instance. We can create our app instance in the
 **index.ts**
 ```
 import App from "./components/App.vue"
-new App({el: "#app"})     // supply the id of the div that will hold our Vue app
+new App({el: "#app"})
 ```
 
 ## But does it run?
