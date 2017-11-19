@@ -2,13 +2,47 @@
 
 This presentation will show you the concept behind building a Vue application.
 
-## UI represents state
+## Components
 
-Vue components are like UI Lego blocks. UI blocks visualise the **state** of your application. By state we mean all the internal variables of a component, for example a `username`.
+Web components are a new proposal to isolate functionality in a  HTML element, for example:
+```
+<html>
+    <navigation></navigation>
+    <slideshow></slideshow>
+    <testimonials></testimonials>
+    <footer></footer>
+</html>
+```
+A component contains not only HTML, but also CSS and Logic (Javascript). For example, the `<slideshow>` component might look like this:
+```
+<div>
+    <img>...</img>
+</div>
+<script>
+    // code for loading and switching images
+</script>
+<css>
+   img { /*animation for images*/ }
+</css>
+```
+
+## Component state
+
+Internal variables of a component are called **state**. A component can visualise its own state by **binding** those variables to its own DOM elements.
+
+```
+<div>
+    username
+</div>
+<script>
+    username = "erik"
+</script>
+```
+*simplified example*
 
 ## Encapsulation
 
-Encapsulation means that a Vue component has no knowledge of its context, and the internal workings of a component are hidden from the outside world. A component has full control over its own state, and cannot access or alter the state of any other component.
+Encapsulation means that a Vue component has no knowledge of its surrounding context, and the internal logic of a component is hidden from the outside world. 
 
 ## UI building blocks
 
@@ -22,9 +56,8 @@ A component can have child components
 
 ![flow2](flow2.png)
 
-A component can have a state. State contains all the variables of your component. A component can **display** its own state in the **UI**.
+A component can have a state and display that state in the **UI**.
 
-In this example, our component has data for a user, a login status, and a shopping cart, and displays the user name and cart contents in the UI.
 
 ![flow3](flow3.png)
 
@@ -39,11 +72,7 @@ A component can change its own state. In this example, clicking the **log out** 
 
 ![flow5](flow5.png)
 
-When our UI becomes more complex, we may want our child components to be able to display the state of a parent. This is done using **props**. 
-
-A **prop** is a *read-only* variable. A component can only **display** a prop but not alter it.
-
-If the state of a parent component changes, all props are automatically updated. In this example, the child can display the user name of the parent.
+When our UI becomes more complex, we may want child components to be able to display the state of a parent. This is done using **props**. A **prop** is a *read-only* variable. A component can only **display** a prop but not alter it.
 
 ---
 ## Events
@@ -52,9 +81,7 @@ If the state of a parent component changes, all props are automatically updated.
 
 If we want a parent component to respond to changes in a child component, we have to listen to **events** that the child **emits**. 
 
-The reason Vue works like this, is that the child does not need to know who is listening to the event. In other words, the child is still ignorant about its surroundings (*encapsulation*)
-
-The parent needs to have an event handler that decides what happens if the child emits an event. This way, the parent retains full control over its own state.
+The reason Vue works like this, is that the child does not need to know who is listening to the event. Only the parent can change its own state.
 
 ---
 
@@ -64,4 +91,4 @@ You may have noticed that components only ever pass data DOWN to child component
 
 ![flow7](flow7.png)
 
-You made it! You can continue with [part 1 of the workshop](../README.md).
+You made it! Now let's build something in [part 1 of the workshop](../README.md).

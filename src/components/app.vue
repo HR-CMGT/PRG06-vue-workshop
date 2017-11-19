@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div>{{ title }}</div>
-        <div class="card" v-for="f in films" :key="f.episode_id">{{f.title}}</div>
+        <div><h2>{{ title }}</h2></div>
     </div>
 </template>
 
@@ -10,17 +9,9 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class App extends Vue {
-    title: string = "Loading..."
-    films: Film[] = []
+    title: string = "Star Wars Movies"
     created(){
-        this.getStarWarsData().then(data => { 
-            this.films = data.results
-            this.title = "Star Wars Movies"
-        })
-    }
-    async getStarWarsData() : Promise<any> {
-        let res = await fetch("https://swapi.co/api/films/")
-        return await res.json()
+        console.log("component created!")
     }
 }
 </script>
@@ -29,17 +20,27 @@ export default class App extends Vue {
 body {
     font-family: sans-serif;
     background-color: #ccc;
-    margin:0px; padding:0px;
+    margin:0px; padding:10px;
 }
 
 div {
     box-sizing: border-box;
 }
 
+button {
+    font-size:1.8em;
+    margin:5px;
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 .card {
     background-color:white;
-    padding:10px; margin:10px;
-    border-radius:10px;
-    
+    padding:10px; margin-bottom:10px;
+    border-radius:6px;
 }
 </style>

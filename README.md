@@ -2,9 +2,9 @@
 
 Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
 
-The workshop consists of an [installation guide](./presentation/install.md), part 1 (this page) and [part 2](./presentation/workshop2.md).
+The workshop consists of an [installation guide](./presentation/install.md), [presentation](./presentation/workflow.md), part 1 (this page) and [part 2](./presentation/workshop2.md).
 
-## Contents
+## Part 1
 
 - Installing
 - Vue Workflow
@@ -34,7 +34,7 @@ We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
    <div>Hello world</div>
 </template>
 
-<script>
+<script lang="ts">
    // our vue component code goes here
 </script>
 
@@ -62,7 +62,9 @@ class App {
 let a = new App()
 ```
 
-In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. A class can have properties and methods. 
+In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. 
+
+A class can have state and methods. In this example the state holds a 'name' and the method is 'sayHello'.
 
 **app.vue**
 ```
@@ -78,11 +80,11 @@ export default class App extends Vue {
 }
 </script>
 ```
-*Please note that using Class syntax is different from the default Javascript syntax that is used in the [Vue Getting Started documentation](https://vuejs.org/v2/guide/). Read more about [Typescript Class components here](https://alligator.io/vuejs/typescript-class-components/)*.
+*When using Class syntax you don't need a `data` and a `methods` object, like you do in a [default Javascript Vue project](https://vuejs.org/v2/guide/). Read more about [Typescript Class components here](https://alligator.io/vuejs/typescript-class-components/)*.
 
 ## Kickstarting the app
 
-We now have an App class, but no instance. We can create our app instance in the entry file of our app: `index.ts`. *(The entry file of our application is configured in `webpack.config.js`).*
+We now have an App class, but no instance. We can create our app instance in the entry file of our app: `index.ts`. *The entry file of our application is configured in `webpack.config.js`.*
 
 **index.html**
 ```
@@ -111,9 +113,7 @@ function updateUI(){
    element.innerHTML = this.name
 }
 ```
-The strength of Reactive frameworks such as Vue, React and Angular is that it we can bind DOM elements (our UI) to data in components. This is called **reactive data**.
-
-In a reactive framework, we use moustache syntax `{{ }}` to connect our state directly to a DOM element.
+In Vue, (and React, Angular) we can bind DOM elements to data. This is called **reactive data**.  We use moustache syntax `{{ }}` to bind data.
 
 **app.vue - reactive framework**
 ```
@@ -122,7 +122,7 @@ class App {
     variable = "hello world"
 }
 ```
-Now, the text in the `<div>` will reflect the value of `variable` automatically! Let's try this by building a single file component with reactive data. In the `created` method, we start a timer that changes a variable over time. The UI should reflect this automatically.
+Now, the text in the `<div>` will reflect the value of `variable` automatically! Let's try this by building a single file component with reactive data. In the `created` method, we start a timer that changes a variable over time..
 
 **app.vue**
 ```
@@ -137,7 +137,7 @@ import { Vue, Component } from "vue-property-decorator";
 export default class App extends Vue {
     name: string = "world"
     created(){
-        setInterval(()=>this.updateName(), 500)
+        setInterval(()=>this.updateName(), 1000)
     }
     updateName(){
         this.name += "!"
@@ -145,51 +145,75 @@ export default class App extends Vue {
 }
 </script>
 ```
-Run `webpack`. Does it work?
-
-*Note: to improve readability, we will omit the `import` and `@component` statements in the next few examples. But you still need to include them!*
+Run `webpack`. Does the UI update every second?
 
 ## Loading JSON data
 
-Since you have already built a RESTful API, you might want to use that data to populate your Vue components. [Read this guide on how to load and display data from your API](./presentation/loading.md)
+Since you have already built a RESTful API, we might as well use that data to populate our Vue app. [Read this guide on how to load and display data from your API](./presentation/loading.md)
 
-## Styles and clicks
+After loading our JSON data into an array, we can visualise the array using a `v-for` loop.
 
-This short code example shows how to respond to button clicks and how to bind a css style to a variable.
 ```
 <template>
-<div>
-    <div :class="{ active: isActive }">The css of this div is bound to a variable</div>
-    <div :class="{ active: enoughClicks }">The css of this div is bound to a function</div>
-    <div @click='divClicked'>Number of clicks is {{ clicks }}</div>
-</div>
+    <div>
+        <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
+    </div>
 </template>
+```
+Inside the div, we can use the `f` variable to display data from one particular movie. Let's create a card that displays the title, director, year and opening crawl of all Star Wars movies:
 
-<script lang="ts">
+```
+<template>
+    <div>
+        <div><h2>{{ title }}</h2></div>
+        <div class="card" v-for="f in films" :key="f.episode_id">
+            <h3>{{f.title}}</h3>
+            <p>{{f.director}}, {{f.release_date}}</p>
+            <p>{{f.opening_crawl}}</p>
+        </div>
+    </div>
+</template>
+```
+You will notice that the template code for the movie gets more complex. This is a perfect opportunity to create a child component for a movie! But before we do that, let's go over a few more basics first:
+
+## Clicks and conditionals
+
+By using `@Click` you can bind a DOM element to a method. We will also use `v-if` to show the button only if the number of movies in the array is 0. 
+
+```
+<button v-if="films.length == 0" @click='loadMovies'>Load movies</button>
+
 export default class App extends Vue {
-    isActive:boolean = true
-    clicks:number = 3
-    get enoughClicks(){
-        return true
-    }
-    divClicked(){
-        this.clicks++;
+    loadMovies(){
+       console.log("button was clicked)
     }
 }
+```
 
-// css
-.active {
-    background-color:red;
+## Styles
+
+In the previous example, the loading button is still clickable while the app is busy loading JSON. It would be better to disable the button when we are already loading data. 
+
+This example binds a CSS class to the button - the class is only added when the 'isLoading' boolean is true.
+```
+<button :class="{ disabled: isLoading }" @click='loadMovies'>Load movies</button>
+
+export default class App extends Vue {
+    isLoading: boolean = false
+    loadMovies(){ ... }
+}
+```
+Can you figure out where to set the loading status to true and false? By the way, you also need the CSS for a disabled status:
+```
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
 }
 ```
 
 ## Vue Workshop part 2
 
-In [part 2](./presentation/workshop2.md) we will look at:
-
-- Working with child components
-- Adding Props
-- Adding Events
+Congratulations! You should now be able to build a single Vue component with data binding, button clicks and dynamic styles. In [part two](./presentation/workshop2.md) we are going to use child components to build a more complex app.
 
 ## Reading List
 
