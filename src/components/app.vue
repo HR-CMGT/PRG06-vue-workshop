@@ -11,7 +11,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 export default class App extends Vue {
     title: string = "Star Wars Movies"
     created(){
-        console.log("component created!")
+        console.log("App is created!")
     }
 }
 </script>

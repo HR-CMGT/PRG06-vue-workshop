@@ -2,15 +2,16 @@
 
 ## Loading data
 
-ES6 introduced the `window.fetch` method to load external data. We will use the new `async await` syntax to call our fetch method. The `created` method is automatically called when the component is added to the DOM.
+ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). A Promise is an object that allows code to be executed when the function has actually returned anything. We do that by calling `then()` on the Promise object.
 
+In the `getStarWarsData` function we use the new `async await` syntax to return a Promise to the `created` method. 
 ```
 export default class App extends Vue {
     films: Film[] = []
     created(){
-        this.getStarWarsData().then(data => { 
-            console.log("loaded data")
-            this.films = data 
+        let prom:Promise<any> = this.getStarWarsData()
+        prom.then(data => {
+            this.films = data
         })
     }
     async getStarWarsData() {
@@ -19,6 +20,16 @@ export default class App extends Vue {
     }
 }
 ```
+To show that `getStarWarsData` returns a Promise, we have used a separate Promise variable. You could omit that variable by calling `.then` directly:
+```
+created(){
+    this.getStarWarsData().then(data => {
+        this.films = data 
+    })
+}
+```
+
+*note: The `created` method is automatically called when the component is added to the DOM*
 
 ![state](./state.png)
 
