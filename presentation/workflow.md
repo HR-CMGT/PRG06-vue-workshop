@@ -1,10 +1,12 @@
-# Vue Workflow
+# Vue
 
-This presentation will show you the concept behind building a Vue application.
+Vue is a *library* that enables you to build a super-fast UI (a View) for your website or web application, using *components*. Vue is very similar to React, meaning that you still have to build your own application logic that sits behind the UI. You can extend Vue and React with routers or data stores, but you don't *have to*.
+
+The main difference with Angular is that Angular provides you with a complete application *framework*, including a strict workflow that dictates how you should use it - the UI is only part of that. You might consider Angular a bit overkill if you need a simple front-end UI, especially considering its steep learning curve.
 
 ## Components
 
-Web components are a new proposal to isolate functionality in a  HTML element, for example:
+Web components isolate functionality in a single HTML element. Consider a simple single-page website with a basic layout. When using web components, your HTML might look like this:
 ```
 <html>
     <navigation></navigation>
@@ -13,16 +15,16 @@ Web components are a new proposal to isolate functionality in a  HTML element, f
     <footer></footer>
 </html>
 ```
-A component contains not only HTML, but also CSS and Logic (Javascript). For example, the `<slideshow>` component might look like this:
+Every component can contain its own HTML, CSS and Javascript! This is what a Vue component looks like:
 ```
 <div>
-    <img>...</img>
+    <p>This is the HTML of the component</p>
 </div>
 <script>
-    // code for loading and switching images
+    // this is the code for the component
 </script>
 <css>
-   img { /*animation for images*/ }
+   p { /*this css applies to this component*/ }
 </css>
 ```
 
