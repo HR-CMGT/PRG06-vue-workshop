@@ -1,17 +1,35 @@
 # Working with JSON data
 
-## Loading data
+## Loading data asynchronously
 
-ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). A Promise is an object that allows code to be executed when the function has actually returned anything. We do that by calling `then()` on the Promise object.
+ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
 
-In the `getStarWarsData` function we use the new `async await` syntax to return a Promise to the `created` method. 
+`let promise:Promise<any> = this.getStarWarsData()`
+
+A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the Promise object. This way, our application won't freeze and wait until the data is loaded.
+```
+promise.then(data => {
+     console.log("data has finished loading!")
+})
+```
+In the `fetch` function we use the new [async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax. This returns the Promise object that contains the data.
+```
+async getStarWarsData() {
+    let promise = await fetch("https://swapi.co/api/films/")
+    return await promise.json()
+}
+```
+
+## Complete code
+
+In this example, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable. 
+
 ```
 export default class App extends Vue {
     films: Film[] = []
     created(){
-        let prom:Promise<any> = this.getStarWarsData()
-        prom.then(data => {
-            this.films = data
+        this.getStarWarsData().then(data => {
+            this.films = data 
         })
     }
     async getStarWarsData() {
@@ -20,15 +38,6 @@ export default class App extends Vue {
     }
 }
 ```
-To show that `getStarWarsData` returns a Promise, we have used a separate Promise variable. You could omit that variable by calling `.then` directly:
-```
-created(){
-    this.getStarWarsData().then(data => {
-        this.films = data 
-    })
-}
-```
-
 *note: The `created` method is automatically called when the component is added to the DOM*
 
 ![state](./state.png)
