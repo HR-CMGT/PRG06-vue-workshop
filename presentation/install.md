@@ -41,7 +41,7 @@ sudo npm install webpack-dev-server -g
 webpack-dev-server
 ```
 
-After installing and checking if everything runs, you can continue with [workshop part 1](README.md) and [part 2](workshop2.md)!
+After installing and checking if everything runs, you can continue with [workshop part 1](../README.md) and [part 2](./workshop2.md)!
 
 ## Files
 
