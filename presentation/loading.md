@@ -40,6 +40,28 @@ export default class App extends Vue {
 ```
 *note: The `created` method is automatically called when the component is added to the DOM. Also, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable. *
 
+## Sending headers
+
+We can send headers and POST data with `fetch` as well!
+```
+export default class App extends Vue {
+    async getWebserviceData() {
+        const myHeaders:Headers = new Headers();
+
+        const myInit:RequestInit = { method: 'GET',
+                    headers: myHeaders,
+                    mode: 'cors',
+                    cache: 'default' };
+
+        const url = "your webservice url here"
+
+        let res = await fetch(url, myInit)
+        return await res.json()
+    }
+}
+```
+
+
 ![state](./state.png)
 
 Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) to check the state of your component.
