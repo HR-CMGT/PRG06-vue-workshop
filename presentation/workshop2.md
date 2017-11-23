@@ -1,6 +1,6 @@
 # Vue Workshop
 
-This is part 2 of the Vue workshop. Please follow part 1 first! In this part we will work with Child components, props and events. We will build a complete frontend for our Star Wars API.
+This is part 2 of the Vue workshop. Please follow [part 1](../README.md) first! In this part we will work with Child components, props and events. We will build a complete frontend for our Star Wars API.
 
 ## Child components
 
@@ -119,7 +119,7 @@ export default class Card extends Vue {
 
 Again, check if this runs in your browser!
 
-We might not want to pass "The Force Awakens" to every card component. We can pass a variable value by using `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable:
+We might not want to pass "The Force Awakens" to every card component. We can use `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable:
 
 `<card :movietitle="title"></card>`
 
@@ -169,7 +169,7 @@ export default class Card extends Vue {
 </style>
 ```
 
-The Chrome debugger has a detailed view of everything that's going on inside our Vue app!
+If everything went well, your Chrome Debugger should look like this:
 
 ![debug2](./debug2.png)
 
@@ -177,7 +177,7 @@ The Chrome debugger has a detailed view of everything that's going on inside our
 
 A prop is a variable that is maintained by the parent, not by the child. In the above exercise, the list of movies is maintained by `App.vue` and displayed by `Card.vue`. If the array in `App.vue` changes, all cards will be automatically updated!
 
-Because the data is still bound to the parent, you should not try to alter a movie's details in `Card.vue`.
+Because a prop is bound to the parent, you should not try to alter a movie's details in `Card.vue`.
 
 ### Copying props to a local state
 
@@ -199,3 +199,15 @@ TODO
 
 - emit
 - listen
+
+## Typescript files
+
+Up until now, all our logic was part of a visual UI component. But once your app becomes a bit more complex, it might make more sense to put non-UI code in a separate Typescript file. This also makes the code reusable among multiple components. 
+
+Let's extract our data loading code into its own component:
+
+
+
+## Router and VueX
+
+TODO

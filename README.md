@@ -1,11 +1,17 @@
 # Vue Workshop
 
-Welcome to the Vue Typescript workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course, where students are creating a RESTful API. We will use Vue to render a front-end for this API!
+Welcome to the Vue workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course. We will use Vue to render a front-end for a RESTful API. 
 
-## Part 1
+## Installing
 
-- Installing
-- Vue Workflow
+Follow the [installation guide](./presentation/install.md)
+
+## What is Vue?
+
+Study the [Vue Workflow](./presentation/workflow.md)
+
+## Workshop part 1
+
 - Single file components
 - Class syntax
 - Reactive data
@@ -15,17 +21,9 @@ Welcome to the Vue Typescript workshop! In this workshop we will learn how to wo
 - Continuing with part 2
 - Reading list
 
-## Installing
-
-Follow the [installation guide](./presentation/install.md)
-
-## Vue Workflow
-
-Study the [Vue Workflow](./presentation/workflow.md)
-
 ## Single file components
 
-We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
+A Vue component can bundle HTML, CSS and Typescript code together in one single `.vue` file:
 
 **app.vue**
 ```
@@ -47,7 +45,7 @@ We can bundle HTML, CSS and Typescript code together in one single `.vue` file:
 
 In this tutorial, we use *class syntax* to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
 
-As a reminder, a Typescript class is described and instantiated like this:
+As a reminder, a class is described and instantiated like this:
 
 **app.ts**
 ```
@@ -143,13 +141,13 @@ export default class App extends Vue {
 }
 </script>
 ```
-Run `webpack`. Does the UI update every second?
+Run `webpack` and open the browser. Does the UI update every second?
 
 ## Loading JSON data
 
-Since you have already built a RESTful API, we might as well use that data to populate our Vue app. [Read this guide on how to load and display data from your API](./presentation/loading.md)
+[Read this guide on how to load and display data from an external API](./presentation/loading.md). 
 
-After loading our JSON data into an array, we can visualise the array using a `v-for` loop.
+In the below example, we are reading JSON and placing the results in the `films` array. In our HTML template, we create a `<div>` for each entry in the array using a `v-for` loop.
 
 ```
 <template>
@@ -157,13 +155,21 @@ After loading our JSON data into an array, we can visualise the array using a `v
         <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
     </div>
 </template>
+export default class App extends Vue {
+    films: Film[] = []
+    loadMovies(){
+        this.getStarWarsData().then(data => { this.films = data.results })
+    }
+    async getStarWarsData() : Promise<any> {
+        let res = await fetch("https://swapi.co/api/films/")
+        return await res.json()
+    }
+}
 ```
-Inside the div, we can use the `f` variable to display data from one particular movie. Let's create a card that displays the title, director, year and opening crawl of all Star Wars movies:
-
+Inside the div, we can use the `f` variable to display all details from one particular movie:
 ```
 <template>
     <div>
-        <div><h2>{{ title }}</h2></div>
         <div class="card" v-for="f in films" :key="f.episode_id">
             <h3>{{f.title}}</h3>
             <p>{{f.director}}, {{f.release_date}}</p>
@@ -172,11 +178,11 @@ Inside the div, we can use the `f` variable to display data from one particular 
     </div>
 </template>
 ```
-You will notice that the template code for the movie gets more complex. This is a perfect opportunity to create a child component for a movie! But before we do that, let's go over a few more basics first:
+You will notice that the template code for the movie is getting more complex. This is a perfect opportunity to create a child component for a movie! But before we do that, let's go over a few more basics first:
 
 ## Clicks and conditionals
 
-By using `@Click` you can bind a DOM element to a method. We will also use `v-if` to show the button only if the number of movies in the array is 0. 
+By using `@Click` you can bind a DOM element to a method. We'll use `v-if` to show a button if the number of movies in the array is 0. 
 
 ```
 <button v-if="films.length == 0" @click='loadMovies'>Load movies</button>
@@ -190,28 +196,35 @@ export default class App extends Vue {
 
 ## Styles
 
-In the previous example, the loading button is still clickable while the app is busy loading JSON. It would be better to disable the button when we are already loading data. 
+In the previous example, the loading button is still clickable while the app is busy loading JSON. Let's see if we can disable the button while data is loading. 
 
-This example binds a CSS class to the button - the class is only added when the 'isLoading' boolean is true.
+We'll bind a `disabled` CSS class to the button when the `isLoading` status is true.
 ```
-<button :class="{ disabled: isLoading }" @click='loadMovies'>Load movies</button>
+<template>
+    <div>
+        <button :class="{ disabled: isLoading }" @click='loadMovies'>Load movies</button>
+    </div>
+</template>
 
+<script lang="ts">
 export default class App extends Vue {
     isLoading: boolean = false
-    loadMovies(){ ... }
 }
-```
-Can you figure out where to set the loading status to true and false? By the way, you also need the CSS for a disabled status:
-```
+</script>
+<style>
 .disabled {
     pointer-events: none;
     opacity: 0.4;
 }
+</style>
 ```
+Can you figure out how to set the loading status to true and false? 
 
 ## Vue Workshop part 2
 
-Congratulations! You should now be able to build a single Vue component with data binding, button clicks and dynamic styles. In [part two](./presentation/workshop2.md) we are going to use child components to build a more complex app.
+Congratulations! We have built a Vue component with data binding, button clicks and dynamic styles!
+
+In [part two](./presentation/workshop2.md) we are going to use child components to build a more complex app.
 
 ## Reading List
 
