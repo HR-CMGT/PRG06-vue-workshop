@@ -38,7 +38,7 @@ export default class App extends Vue {
     }
 }
 ```
-*note: The `created` method is automatically called when the component is added to the DOM. Also, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable. *
+*note: The `created` method is automatically called when the component is added to the DOM. Also, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable.*
 
 ## Sending headers
 
