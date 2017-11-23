@@ -4,7 +4,7 @@
 
 ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
 
-`let promise:Promise<any> = this.getStarWarsData()`
+`let promise = fetch(url)`
 
 A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the Promise object. This way, our application won't freeze and wait until the data is loaded.
 ```
