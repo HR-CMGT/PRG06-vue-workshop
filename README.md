@@ -2,13 +2,13 @@
 
 Welcome to the Vue workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course. We will use Vue to render a front-end for a RESTful API. 
 
-## Installing
-
-Follow the [installation guide](./presentation/install.md)
-
 ## What is Vue?
 
 Study the [Vue Workflow](./presentation/workflow.md)
+
+## Installing
+
+Follow the [installation guide](./presentation/install.md)
 
 ## Workshop part 1
 

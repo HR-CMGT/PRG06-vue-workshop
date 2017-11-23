@@ -119,7 +119,7 @@ export default class Card extends Vue {
 
 Again, check if this runs in your browser!
 
-We might not want to pass "The Force Awakens" to every card component. We can use `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable:
+We might not want to pass "The Force Awakens" to every card component. We can use `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable. In this case, `title` is a variable on `App.vue`.
 
 `<card :movietitle="title"></card>`
 
@@ -177,7 +177,7 @@ If everything went well, your Chrome Debugger should look like this:
 
 A prop is a variable that is maintained by the parent, not by the child. In the above exercise, the list of movies is maintained by `App.vue` and displayed by `Card.vue`. If the array in `App.vue` changes, all cards will be automatically updated!
 
-Because a prop is bound to the parent, you should not try to alter a movie's details in `Card.vue`.
+Because a prop is bound to the parent, you should not try to alter a movie's details in `Card.vue`. [Read more about the Vue Workflow](./workflow.md).
 
 ### Copying props to a local state
 
@@ -200,13 +200,54 @@ TODO
 - emit
 - listen
 
-## Typescript files
+## Not everything is part of the UI
 
-Up until now, all our logic was part of a visual UI component. But once your app becomes a bit more complex, it might make more sense to put non-UI code in a separate Typescript file. This also makes the code reusable among multiple components. 
+Not all logic of your app has to be inside a UI component. You can create standalone `.ts` classes for other logic, so that you can reuse that logic across all your components. In this example we create a calculator that we can `import` anywhere:
 
-Let's extract our data loading code into its own component:
+**Calculator.ts**
+```
+export default class Calculator {
+    addNumbers(a:number, b:number) : number {
+        return a + b
+    }
+}
+```
+**App.vue**
+```
+import Calculator from "./Calculator"
+export default class App extends Vue {
+    created() {
+        let c = new Calculator()
+        let result = c.addNumbers(12, 24)
+    }
+}
+```
 
+### Data Service
 
+As another example, let's put our data loading code in its own typescript file, and use it from App.vue:
+
+**DataLoader.ts**
+```
+export default class DataLoader {
+    async getStarWarsData(): Promise<any> {
+        let res = await fetch("https://swapi.co/api/films/")
+        return await res.json()
+    }
+}
+```
+**App.vue**
+```
+import DataLoader from "./DataLoader"
+
+export default class App extends Vue {
+    loadMovies(){
+        let ds:DataLoader = new DataLoader()    
+        ds.getStarWarsData().then(data => { this.films = data.results })
+    }
+}
+```
+[Read more about working with import and export](https://www.typescriptlang.org/docs/handbook/modules.html)
 
 ## Router and VueX
 

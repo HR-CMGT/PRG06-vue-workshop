@@ -53,29 +53,6 @@ sudo npm install webpack-dev-server -g
 webpack-dev-server
 ```
 
-## Working with modules
-
-Not all your code has to be inside a `.vue` file - those are only useful for visual UI elements. You can still create regular `.ts` classes for other logic. Since we already have webpack you can use modules in your `.ts` files as well:
-
-**demo.ts**
-```
-export default class DataLoader {
-    loadData(){
-        console.log("loading data...")
-    }
-}
-```
-**app.vue**
-```
-import DataLoader from "./DataLoader"
-export default class App extends Vue {
-    created() {
-        let dl = new DataLoader()
-        dl.loadData()
-    }
-}
-```
-
 ## Files
 
 - **tsconfig.json** This file decides how your typescript files should be interpreted
