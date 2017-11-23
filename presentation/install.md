@@ -1,18 +1,6 @@
-# Installing tools
+# Installing the workshop files
 
-After installing and checking if everything runs, you can continue with [workshop part 1](README.md) and [part 2](workshop2.md)!
-
-## Contents
-
-- Tools
-- Using Webpack
-- Working with modules
-- Types for JSON data
-- Configuration files
-
-## Tools
-
-First install [Visual Studio Code](https://code.visualstudio.com). To get code completion in Single File Components, install the [Vetur extension](https://marketplace.visualstudio.com/items?itemName=octref.vetur) 
+Install [Visual Studio Code](https://code.visualstudio.com). From the extensions tab in VS Code install the [Vetur extension](https://marketplace.visualstudio.com/items?itemName=octref.vetur). *You can also use Webstorm, and enable support for .vue files in preferences*.
 
 Make sure you have installed [NodeJS](https://nodejs.org/en/), and read [this introduction](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) if you are unfamiliar with npm.
 
@@ -52,6 +40,8 @@ You have to view your project on a local server: `http://localhost/`. If you don
 sudo npm install webpack-dev-server -g
 webpack-dev-server
 ```
+
+After installing and checking if everything runs, you can continue with [workshop part 1](README.md) and [part 2](workshop2.md)!
 
 ## Files
 
