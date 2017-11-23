@@ -33,7 +33,9 @@ npm install
 code .
 ```
 
-*Note : if you don't want to use git for this workshop you can remove the `.git` directory from the project folder: `rm -rf .git`. If you do want to use git, you have to change the remote url: `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git`*
+To enable the `code .` shortcut, launch VS Code. Now open the Command Palette (F1) and type `shell command` to find the Shell Command: `Install 'code' command in PATH command`. Restart your terminal.
+
+*Note : You can remove the `.git` directory from the project folder: `rm -rf .git`.`*
 
 ## Using webpack
 
