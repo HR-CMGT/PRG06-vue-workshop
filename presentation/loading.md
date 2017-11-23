@@ -1,6 +1,6 @@
 # Working with JSON data
 
-## Loading data asynchronously
+## Promises and async await
 
 ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
 
@@ -20,16 +20,16 @@ async getStarWarsData() {
 }
 ```
 
-## Complete code
+## Let's load JSON
 
-In this example, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable. 
+The [Star Wars API](https://swapi.co) allows us to load a list of all star wars movies. After calling the [films url](https://swapi.co/api/films/) we get a JSON file.
 
 ```
 export default class App extends Vue {
     films: Film[] = []
     created(){
         this.getStarWarsData().then(data => {
-            this.films = data 
+            this.films = data.results
         })
     }
     async getStarWarsData() {
@@ -38,7 +38,7 @@ export default class App extends Vue {
     }
 }
 ```
-*note: The `created` method is automatically called when the component is added to the DOM*
+*note: The `created` method is automatically called when the component is added to the DOM. Also, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable. *
 
 ![state](./state.png)
 
