@@ -119,7 +119,7 @@ export default class Card extends Vue {
 
 Again, check if this runs in your browser!
 
-We might not want to pass "The Force Awakens" to every card component. We can pass a variable value by using `v-bind:movietitle`, or the shortcut `:movietitle`. In this case `title` is a variable in App.vue
+We might not want to pass "The Force Awakens" to every card component. We can pass a variable value by using `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable:
 
 `<card :movietitle="title"></card>`
 
@@ -172,6 +172,26 @@ export default class Card extends Vue {
 The Chrome debugger has a detailed view of everything that's going on inside our Vue app!
 
 ![debug2](./debug2.png)
+
+## Props are reactive
+
+A prop is a variable that is maintained by the parent, not by the child. In the above exercise, the list of movies is maintained by `App.vue` and displayed by `Card.vue`. If the array in `App.vue` changes, all cards will be automatically updated!
+
+Because the data is still bound to the parent, you should not try to alter a movie's details in `Card.vue`.
+
+### Copying props to a local state
+
+If you DO want to be able to change data that you received as a Prop, you should copy the Prop first to a local variable. 
+
+```
+export default class Block extends Vue {
+    @Prop() initialValue: number
+    myValue = this.initialValue
+    increment() {
+        this.myValue++
+    }
+}
+```
 
 ## Events
 
