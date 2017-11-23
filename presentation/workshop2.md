@@ -17,7 +17,7 @@ When looping through the `films` array at the end of part 1, we ended up with th
     </div>
 </template>
 ```
-Let's create a simple card component for the movie details, making App.vue look a lot simpler:
+Let's start by removing all the movie detail HTML and replace it with `<card>`. The card will hold all the detail HTML.
 ```
 <template>
     <div>
@@ -28,7 +28,7 @@ Let's create a simple card component for the movie details, making App.vue look 
 ```
 ## The card component
 
-We'll start by creating a basic child component. Create a `Card.vue` file.
+Create a `Card.vue` file:
 
 **Card.vue**
 
@@ -93,21 +93,17 @@ Check your browser and see if the child component is correctly loaded!
 
 ## Passing data to a child component
 
-We want our card to display movie details, so let's pass the movie data for one movie from App to Card. This is done using **props**.
+We want our card to display movie details, so let's pass some data from App to Card. This is done using **props**.
 
 **App.vue**
 
-This example shows how to pass a literal string (`The Force Awakens`) to our card:
+We'll start by passing the literal string "The Force Awakens" to the card:
 
 `<card movietitle="The Force Awakens"></card>`
 
-If we want to pass a variable value, we have to use `v-bind:movietitle`, or the shortcut `:movietitle`. In this example, `title` is a variable in App.vue.
-
-`<card :movietitle="title"></card>`
-
 **Card.vue**
 
-In the card component we have to declare the movietitle as a `@Prop()`. Then we can use it in our template:
+The card component needs to know that the parent is sending a variable (a *Prop*). We do this by typing `@Prop()` before the variable declaration:
 
 ```
 <template>
@@ -121,13 +117,19 @@ export default class Card extends Vue {
 }
 ```
 
+Again, check if this runs in your browser!
+
+We might not want to pass "The Force Awakens" to every card component. We can pass a variable value by using `v-bind:movietitle`, or the shortcut `:movietitle`. In this case `title` is a variable in App.vue
+
+`<card :movietitle="title"></card>`
+
 ### Displaying a Card for each movie
 
 In part 1 we used `v-for` to display a `<div>` for each movie. This works for components too. 
 
 `<card v-for="f in films" :key="f.episode_id" :movietitle="f.title"></card>`
 
-Check if this works in your browser!
+This should display a list of cards with all titles from the Star Wars movies! Check if it runs in your browser 👨🏼‍💻
 
 ### Passing an entire object
 
@@ -166,6 +168,10 @@ export default class Card extends Vue {
 }
 </style>
 ```
+
+The Chrome debugger has a detailed view of everything that's going on inside our Vue app!
+
+![debug2](./debug2.png)
 
 ## Events
 
