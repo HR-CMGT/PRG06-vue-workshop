@@ -2,6 +2,8 @@
 
 Welcome to the Vue workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course. We will use Vue to render a front-end for a RESTful API. 
 
+![Screenshot](./presentation/screenshot.png)
+
 ## What is Vue?
 
 Study the [Vue Workflow](./presentation/workflow.md)
@@ -155,6 +157,7 @@ In the below example, we are reading JSON and placing the results in the `films`
         <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
     </div>
 </template>
+
 export default class App extends Vue {
     films: Film[] = []
     loadMovies(){
