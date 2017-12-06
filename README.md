@@ -47,38 +47,42 @@ A Vue component can bundle HTML, CSS and Typescript code together in one single 
 
 In this tutorial, we use *class syntax* to define our Vue components. CMGT PRG06 students are already familiar with this syntax since we used it to build [games in Typescript](https://github.com/HR-CMGT/Typescript). 
 
-As a reminder, a class is described and instantiated like this:
+Class syntax simplifies how a Vue component is defined. This example compares Vue component in basic javascript syntax and class syntax.
 
-**app.ts**
+**javascript syntax**
 ```
-class App {
-    user: string = "erik"
-    login():void {
-        console.log("logged in as " + this.user);
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Data contains the state of the app',
+    turtles: ["Leonardo","Donatello","Michaelangelo","Raphael"]   
+  },
+  methods: {
+    addTurtle:function(){
+      this.turtles.push("Another turtle...")
+    }
+  },
+  created() {
+    this.message = "Let's list some turtles!"
+    setInterval(()=>this.addTurtle(), 5000)
+  }
+})
+```
+**class syntax**
+```
+class App extends Vue {
+    message = 'Data contains the state of the app'
+    turtles = ["Leonardo","Donatello","Michaelangelo","Raphael"]   
+    addTurtle() {
+        this.turtles.push("Another turtle...")
+    }
+    created(){
+        this.message = "Let's list some turtles!"
+        setInterval(()=>this.addTurtle(), 5000)
     }
 }
-
-let a = new App()
-a.login()
 ```
-
-In Vue, we can create a component by extending (*inheriting*) the default Vue class. To do that, we need to `import` Vue first. We can add state to the component by adding class properties:
-
-**app.vue**
-```
-<script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-
-@Component
-export default class App extends Vue {
-    name: string = "world!"
-    sayHello() {
-        console.log("hello " + this.name)
-    }
-}
-</script>
-```
-*If you are familiar with [Vue in Javascript](https://vuejs.org/v2/guide/), you might expect a `data` and a `methods` object, but we don't need those when using [class syntax](https://alligator.io/vuejs/typescript-class-components/)*.
+[Read more about class syntax](https://alligator.io/vuejs/typescript-class-components/)
 
 ## Kickstarting the app
 
