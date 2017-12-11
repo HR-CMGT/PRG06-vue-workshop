@@ -6,24 +6,37 @@ ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetc
 
 `let promise = fetch(url)`
 
-A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the returned Promise object:
+A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the returned Promise object.
 ```
-fetch("https://swapi.co/api/films/").then(data => {
-    console.log("finished loading!")
-    console.log(data)
+let prom = fetch("https://swapi.co/api/films/")
+prom.then(data => {
+    console.log("loaded data")
 })
+```
+It's allowed to chain `then()` calls. In this example the `response.json()` method also returns a promise, so we have to call `then()` again:
+```
+function getStarWarsData() {
+  fetch("https://swapi.co/api/films/")
+    .then(response => {
+        return response.json()
+    })
+    .then(json => {
+        console.log("json data is " + json)
+    })
+  })
+}
 ```
 
 ## Async await
 
-[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that allows us to write asynchronous methods almost exactly the same as a normal method:
+[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that allows us to write the above example in a much more readable way:
 ```
 async getStarWarsData() {
     let promise = await fetch("https://swapi.co/api/films/")
     return await promise.json()
 }
 ```
-Keep in mind that when you call `getStarWarsData()`, it still returns a Promise, so you need `then()` to handle the result.
+getStarWarsData returns a promise, so you still need `then()` to handle the final result:
 
 ## Example
 
