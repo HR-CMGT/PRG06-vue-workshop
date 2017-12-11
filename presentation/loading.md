@@ -1,26 +1,31 @@
 # Working with JSON data
 
-## Promises and async await
+## Promises
 
 ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
 
 `let promise = fetch(url)`
 
-A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the Promise object. This way, our application won't freeze and wait until the data is loaded.
+A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the returned Promise object:
 ```
-promise.then(data => {
-     console.log("data has finished loading!")
+fetch("https://swapi.co/api/films/").then(data => {
+    console.log("finished loading!")
+    console.log(data)
 })
 ```
-In the `fetch` function we use the new [async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax. This returns the Promise object that contains the data.
+
+## Async await
+
+[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that allows us to write asynchronous methods almost exactly the same as a normal method:
 ```
 async getStarWarsData() {
     let promise = await fetch("https://swapi.co/api/films/")
     return await promise.json()
 }
 ```
+Keep in mind that when you call `getStarWarsData()`, it still returns a Promise, so you need `then()` to handle the result.
 
-## Let's load JSON
+## Example
 
 The [Star Wars API](https://swapi.co) allows us to load a list of all star wars movies. After calling the [films url](https://swapi.co/api/films/) we get a JSON file.
 
@@ -29,6 +34,7 @@ export default class App extends Vue {
     films: Film[] = []
     created(){
         this.getStarWarsData().then(data => {
+            console.log("json has loaded!")
             this.films = data.results
         })
     }
@@ -38,7 +44,6 @@ export default class App extends Vue {
     }
 }
 ```
-*note: The `created` method is automatically called when the component is added to the DOM. Also, we call `then()` directly on the `getStarWarsData` function, so we don't need a separate `promise` variable.*
 
 ## Sending headers
 

@@ -1,6 +1,7 @@
 <template>
     <div>
         <div><h2>{{ title }}</h2></div>
+        
     </div>
 </template>
 
@@ -11,7 +12,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 export default class App extends Vue {
     title: string = "Star Wars Movies"
     created(){
-        console.log("App is created!")
+        console.log("hi!")
     }
 }
 </script>

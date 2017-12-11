@@ -35,11 +35,12 @@ This should create a `build.js` file in your `dist` folder, generated from your 
 
 ## Viewing the project
 
-You have to view your project on a local server: `http://localhost/`. If you don't have a localhost server, you can use [webpack dev server](https://www.npmjs.com/package/webpack-dev-server) - this is super handy because it automatically refreshes the browser after you update your code!
+You have to view your project on a local server: `http://localhost/`. If you don't have a localhost server, you can use [webpack dev server](https://www.npmjs.com/package/webpack-dev-server). 
 ```
 sudo npm install webpack-dev-server -g
 webpack-dev-server
 ```
+This should show your website at `http://localhost:8080/dist`. The dev server will automatically refresh when you update your code!
 
 After installing and checking if everything runs, you can continue with [workshop part 1](../README.md) and [part 2](./workshop2.md)!
 

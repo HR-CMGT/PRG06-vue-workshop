@@ -86,7 +86,7 @@ class App extends Vue {
 
 ## Kickstarting the app
 
-We now have an App class, but no instance. We have to instantiate our app in `index.ts`. *The entry file of an application is configured in `webpack.config.js`.*
+Now that we have an App class, we can instantiate it in `index.ts`. *The entry file of an application is configured in `webpack.config.js`.*
 
 **index.html**
 ```
@@ -107,7 +107,7 @@ Run `webpack` in your terminal and open the page in localhost. For debugging, op
 
 In the old days, without a reactive framework, we had to call an update function every time our data changed:
 
-**app.js - manually updating the DOM**
+**manually updating the DOM**
 ```
 <div id="user"></div>
 function updateUI(){
@@ -124,7 +124,7 @@ class App {
     variable = "hello world"
 }
 ```
-Now, the text in the `<div>` will reflect the value of `variable` automatically! Let's try this by building a single file component with reactive data. In the `created` method, we start a timer that changes a variable over time..
+Now, the text in the `<div>` will reflect the value of `variable` automatically! Let's try this by adding reactive data to app.vue. 
 
 **app.vue**
 ```
@@ -138,72 +138,87 @@ import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class App extends Vue {
     name: string = "world"
+}
+</script>
+```
+
+### Lists
+
+We can render arrays as lists in our HTML by using the `v-for` loop:
+```
+<ul>
+    <li v-for="t in listexample" :key="t">{{ t }}</li>
+</ul>
+
+export default class App extends Vue {
+    listexample:string[] = ["buy milk", "build vue app"]
+}
+```
+
+To prove that the DOM updates automatically, let's start a timer that pushes an item into the array:
+
+**app.vue**
+```
+export default class App extends Vue {
+    listexample:string[] = ["buy milk", "build vue app"]
     created(){
-        setInterval(()=>this.updateName(), 1000)
+        setInterval(()=>this.addItem(), 1000)
     }
-    updateName(){
-        this.name += "!"
+    addItem(){
+        this.listexample.push("buy more milk")
     }
 }
 </script>
 ```
 Run `webpack` and open the browser. Does the UI update every second?
 
-## Loading JSON data
+## Buttons
 
-[Read this guide on how to load and display data from an external API](./presentation/loading.md). 
-
-In the below example, we are reading JSON and placing the results in the `films` array. In our HTML template, we create a `<div>` for each entry in the array using a `v-for` loop.
+By using `@Click` you can bind a DOM element to a method. We'll also use `v-if` to show this button only if the number of items in an array is 0. 
 
 ```
-<template>
-    <div>
-        <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
-    </div>
-</template>
+<button v-if="turtles.length == 0" @click='addTurtle'>Add a turtle</button>
 
 export default class App extends Vue {
-    films: Film[] = []
-    loadMovies(){
-        this.getStarWarsData().then(data => { this.films = data.results })
-    }
-    async getStarWarsData() : Promise<any> {
-        let res = await fetch("https://swapi.co/api/films/")
-        return await res.json()
+    turtles:string[] = []
+    addTurtle(){
+       this.turtles.push("Leonardo")
     }
 }
 ```
-Inside the div, we can use the `f` variable to display all details from one particular movie:
+
+## Loading JSON data
+
+Our app is going to use data from a RESTful API, so let's take a little sidetour and see how we can load JSON using just ES6.
+
+[Loading JSON](./presentation/loading.md). 
+
+### Displaying JSON
+
+If you followed the JSON tutorial, you now have JSON data containing Star Wars movies. In our HTML template, we create a `<div>` for each entry in the array using a `v-for` loop. Inside the div you can access all the details from one movie:
+
 ```
 <template>
     <div>
-        <div class="card" v-for="f in films" :key="f.episode_id">
+        <button @click='loadData'>Load data</button>
+        <div v-for="f in films" :key="f.episode_id">
             <h3>{{f.title}}</h3>
             <p>{{f.director}}, {{f.release_date}}</p>
             <p>{{f.opening_crawl}}</p>
         </div>
     </div>
 </template>
-```
-You will notice that the template code for the movie is getting more complex. This is a perfect opportunity to create a child component for a movie! But before we do that, let's go over a few more basics first:
-
-## Clicks and conditionals
-
-By using `@Click` you can bind a DOM element to a method. We'll use `v-if` to show a button if the number of movies in the array is 0. 
-
-```
-<button v-if="films.length == 0" @click='loadMovies'>Load movies</button>
 
 export default class App extends Vue {
-    loadMovies(){
-       console.log("button was clicked)
+    films: Film[] = []
+    loadData(){
+        // load json data and place it in this.films
     }
 }
 ```
-
 ## Styles
 
-In the previous example, the loading button is still clickable while the app is busy loading JSON. Let's see if we can disable the button while data is loading. 
+In the previous example, the loading button is still clickable while the app is busy loading JSON. Let's see if we can disable the button when data is already loading. 
 
 We'll bind a `disabled` CSS class to the button when the `isLoading` status is true.
 ```
@@ -218,20 +233,20 @@ export default class App extends Vue {
     isLoading: boolean = false
 }
 </script>
-<style>
+<style scoped>
 .disabled {
     pointer-events: none;
     opacity: 0.4;
 }
 </style>
 ```
-Can you figure out how to set the loading status to true and false? 
+Now you can set the `isLoading` variable to true when `fetch` is called, and to false again when loading has finished. The style of the button should automatically update. See if you can add this code yourself!
 
 ## Vue Workshop part 2
 
 Congratulations! We have built a Vue component with data binding, button clicks and dynamic styles!
 
-In [part two](./presentation/workshop2.md) we are going to use child components to build a more complex app.
+In [part two](./presentation/workshop2.md) we are going to look at how to use multiple components, and how they communicate with each other.
 
 ## Reading List
 
