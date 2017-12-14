@@ -81,11 +81,11 @@ export default class App extends Vue {
     }
 }
 ```
+## Checking loaded data in the Chrome plugin
 
+Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) to quickly check what data is available in your Vue app.
 
 ![state](./state.png)
-
-Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) to check the state of your component.
 
 ## Displaying data
 
