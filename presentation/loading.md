@@ -64,12 +64,15 @@ We can send headers and POST data with `fetch` as well!
 ```
 export default class App extends Vue {
     async getWebserviceData() {
-        const myHeaders:Headers = new Headers();
+    
+        const myHeaders:Headers= new Headers({
+              'Content-Type': 'application/json'
+        })
 
         const myInit:RequestInit = { method: 'GET',
                     headers: myHeaders,
                     mode: 'cors',
-                    cache: 'default' };
+                    cache: 'default' }
 
         const url = "your webservice url here"
 
@@ -108,5 +111,6 @@ Note that the variable that holds the Star Wars JSON is an array of type `Film`.
 
 ## Reading List
 
+- [Using headers with fetch](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - [MDN docs async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Why async await is better than Promises](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
