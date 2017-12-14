@@ -2,8 +2,6 @@
 
 Welcome to the Vue workshop! In this workshop we will learn how to work with Vue, using Typescript, Class Syntax and Single File Components. This workshop is part of the fullstack course. We will use Vue to render a front-end for a RESTful API. 
 
-![Screenshot](./presentation/screenshot.png)
-
 ## What is Vue?
 
 Study the [Vue Workflow](./presentation/workflow.md)
@@ -12,16 +10,24 @@ Study the [Vue Workflow](./presentation/workflow.md)
 
 Follow the [installation guide](./presentation/install.md)
 
-## Workshop part 1
+## Loading JSON data
+
+Our app is going to use data from a RESTful API, so let's take a quick look at loading JSON.
+
+[Loading JSON](./presentation/loading.md). 
+
+## What are we going to learn?
 
 - Single file components
 - Class syntax
 - Reactive data
-- Loading JSON data
+- Loading external data and images
 - Clicks and conditionals
 - Styles
-- Continuing with part 2
-- Reading list
+
+When finished, our project should look like this
+
+![Screenshot](./presentation/screenshot.png)
 
 ## Single file components
 
