@@ -111,6 +111,7 @@ Note that the variable that holds the Star Wars JSON is an array of type `Film`.
 
 ## Reading List
 
+- [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [Using headers with fetch](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - [MDN docs async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Why async await is better than Promises](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
