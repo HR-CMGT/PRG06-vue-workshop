@@ -266,6 +266,7 @@ In [part two](./presentation/workshop2.md) we are going to look at how to use mu
 ### Tutorials and examples
 
 - [5 practical examples for learning Vue.js](https://tutorialzine.com/2016/03/5-practical-examples-for-learning-vue-js)
+- [Vue courses on egghead.io](https://egghead.io/browse/frameworks/vue)
 - [Using Class Component with Typescript](https://alligator.io/vuejs/typescript-class-components/)
 - [Huge list of Vue Examples and readymade components](https://github.com/vuejs/awesome-vue)
 - [CSS Tricks: introduction to Vue](https://css-tricks.com/intro-to-vue-1-rendering-directives-events/)
