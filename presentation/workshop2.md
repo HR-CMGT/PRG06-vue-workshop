@@ -315,7 +315,10 @@ export default class App extends Vue {
 
 ## Dynamic components
 
-- Vue allows switching components on the spot, instead of using `v-if` and `v-else` to display views. [Dynamic components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)
+Vue allows switching components on the spot, instead of using `v-if` and `v-else` to display views. You can use transitions between components.
+
+- [Dynamic components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)
+- [Dynamic components tutorial](https://coligo.io/dynamic-components-in-vuejs/)
 
 ## Vue Router
 
