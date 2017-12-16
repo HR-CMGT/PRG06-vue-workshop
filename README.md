@@ -10,7 +10,7 @@ Study the [Vue Workflow](./presentation/workflow.md)
 
 Follow the [installation guide](./presentation/install.md)
 
-## What are we going to learn?
+## Part 1
 
 - Single file components
 - Class syntax
@@ -18,6 +18,15 @@ Follow the [installation guide](./presentation/install.md)
 - Loading JSON
 - Clicks and conditionals
 - Styles
+
+## Part 2
+
+- Creating components
+- Props
+- Events
+- What's next?
+
+[Skip to part 2](./presentation/workshop2.md)
 
 When finished, our project should look like this
 
