@@ -1,6 +1,10 @@
 # Vue Workshop
 
-This is part 2 of the Vue workshop. Please follow [part 1](../README.md) first! In this part we will work with Child components, props and events. We will build a complete frontend for our Star Wars API.
+This is part 2 of the Vue workshop. Please follow [part 1](../README.md) first! In this part we will work with 
+
+- Child components
+- Props 
+- Events
 
 ## Child components
 
@@ -179,26 +183,87 @@ A prop is a variable that is maintained by the parent, not by the child. In the 
 
 Because a prop is bound to the parent, you should not try to alter a movie's details in `Card.vue`. [Read more about the Vue Workflow](./workflow.md).
 
-### Copying props to a local state
+## Events
 
-If you DO want to be able to change data that you received as a Prop, you should copy the Prop first to a local variable. 
+Since Vue components have no knowledge of their surroundings, events are the way for a component to respond to what happens in the application. In this example, the App component uses `v-on` to listen to a `movieclicked` event from the Card component.
 
+APP.VUE
 ```
-export default class Block extends Vue {
-    @Prop() initialValue: number
-    myValue = this.initialValue
-    increment() {
-        this.myValue++
+<card v-on:movieclicked="addToList(index)"></card>
+```
+Now, the card component uses `$emit` to send the `movieclicked` event:
+
+CARD.VUE
+```
+<div @click='movieClicked'></div>
+
+export default class Card extends Vue {
+    movieClicked(){
+        this.$emit('movieclicked')
     }
 }
 ```
 
-## Events
+## Adding the watchlist component
 
-TODO
+We are going to build a new `Watchlist` component, that displays movies that we still want to watch. The example code here will show the main essentials. Try to integrate them into your project by yourself!
 
-- emit
-- listen
+APP.VUE
+```
+// show a card for every movie in the array
+<card v-for="(f,index) in films" :key="f.episode_id" :movie="f" :display="gridstyle" v-on:movieclicked="addToList(index)"></card>
+
+// show the watchlist component only if the watchlater array is not empty
+<watchlist v-if="watchlater.length > 0" :watchlater="watchlater" v-on:listitemclicked="removeFromList"></watchlist>
+
+export default class App extends Vue {
+    // add an array that holds our watchlater list
+    watchlater :Film[] = []
+
+    // create methods that can add movies to the watchlater list
+    addToList(i:number){
+        this.watchlater.push(this.films[i])
+    }
+    removeFromList(i:number){
+        this.watchlater.splice(i,1)
+    }
+}
+```
+
+You can copy>paste the watchlater component, but you'll have to add a few things:
+
+- display the number of movies, and how many hours it will take to watch them (assuming a movie takes 2 hours)
+- add a button to remove the movie from the watchlist. the button calls the `remove` method, and that method `emits` an event to App! App removes the item from the watchlist.
+
+WATCHLATER.VUE
+```
+<template>
+    <div class="watchlist">
+        <div>
+            <h2>Watchlist</h2>
+            <p>Watching N movies will take N hours</p>
+        </div>
+        <div class="watchitem" v-for="(f,index) in watchlater" :key="f.episode_id">
+            <h4>{{f.title}}</h4>
+            // add a remove button here
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+import { Vue, Component, Prop } from "vue-property-decorator"
+import DataLoader from "../services/DataLoader"
+
+@Component
+export default class Watchlist extends Vue {
+    @Prop() watchlater: Film[]
+    remove(i:number){
+        // call this method if the movie is clicked, and then emit an event!
+    }
+}
+</script>
+```
+
 
 ## Not everything is part of the UI
 
@@ -225,12 +290,12 @@ export default class App extends Vue {
 
 ### Data Service
 
-As another example, let's put our data loading code in its own typescript file, and use it from App.vue:
+Let's put our data loading code in a separate class. We use a `static` function so we don't have to create instances of `DataLoader`. 
 
 **DataLoader.ts**
 ```
 export default class DataLoader {
-    async getStarWarsData(): Promise<any> {
+    static async getStarWarsData(): Promise<any> {
         let res = await fetch("https://swapi.co/api/films/")
         return await res.json()
     }
@@ -242,13 +307,20 @@ import DataLoader from "./DataLoader"
 
 export default class App extends Vue {
     loadMovies(){
-        let ds:DataLoader = new DataLoader()    
-        ds.getStarWarsData().then(data => { this.films = data.results })
+        DataLoader.getStarWarsData().then(data => { this.films = data.results })
     }
 }
 ```
 [Read more about working with import and export](https://www.typescriptlang.org/docs/handbook/modules.html)
 
-## Router and VueX
+## Dynamic components
 
-TODO
+- Vue allows switching components on the spot, instead of using `v-if` and `v-else` to display views. [Dynamic components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)
+
+## Vue Router
+
+- Vue Router uses the URL bar to display views: [Vue Router](https://router.vuejs.org/en/)
+
+## VueX
+
+- VueX maintains all your data in a separate store, that you can subscribe to. [VueX](https://vuex.vuejs.org/en/)

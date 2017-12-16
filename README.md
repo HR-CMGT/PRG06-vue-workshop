@@ -10,18 +10,12 @@ Study the [Vue Workflow](./presentation/workflow.md)
 
 Follow the [installation guide](./presentation/install.md)
 
-## Loading JSON data
-
-Our app is going to use data from a RESTful API, so let's take a quick look at loading JSON.
-
-[Loading JSON](./presentation/loading.md). 
-
 ## What are we going to learn?
 
 - Single file components
 - Class syntax
 - Reactive data
-- Loading external data and images
+- Loading JSON
 - Clicks and conditionals
 - Styles
 
@@ -116,10 +110,8 @@ In the old days, without a reactive framework, we had to call an update function
 **manually updating the DOM**
 ```
 <div id="user"></div>
-function updateUI(){
-   let element = document.getElementById("user")
-   element.innerHTML = this.name
-}
+let element = document.getElementById("user")
+element.innerHTML = this.name
 ```
 In Vue, (and React, Angular) we can bind DOM elements to data. This is called **reactive data**.  We use moustache syntax `{{ }}` to bind data.
 

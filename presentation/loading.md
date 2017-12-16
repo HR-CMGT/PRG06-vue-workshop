@@ -6,55 +6,40 @@ ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetc
 
 `let promise = fetch(url)`
 
-A **Promise** object allows us to define code that will be executed once `fetch` has returned data. We do that by calling `then()` on the returned Promise object.
-```
-let prom = fetch("https://swapi.co/api/films/")
-prom.then(data => {
-    console.log("loaded data")
-})
-```
-It's allowed to chain `then()` calls. In this example the `response.json()` method also returns a promise, so we have to call `then()` again:
+A **Promise** object allows us to define code that will be executed *once the data has loaded*. Place this code in a `then()` call.
 ```
 function getStarWarsData() {
-  fetch("https://swapi.co/api/films/")
-    .then(response => {
-        return response.json()
-    })
-    .then(json => {
-        console.log("json data is " + json)
-    })
-  })
+    fetch('http://swapi.co/api/people/1/')
+        .then(res => res.json())
+        .then(res => {
+            console.log("data is ready!" + res)
+        })
 }
 ```
-
 ## Async await
 
-[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that allows us to write the above example in a much more readable way:
+[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that makes asynchronous methods more readable:
 ```
 async getStarWarsData() {
     let promise = await fetch("https://swapi.co/api/films/")
     return await promise.json()
 }
 ```
-getStarWarsData returns a promise, so you still need `then()` to handle the final result:
-
 ## Example
 
-The [Star Wars API](https://swapi.co) allows us to load a list of all star wars movies. After calling the [films url](https://swapi.co/api/films/) we get a JSON file.
+Because an async function returns a Promise, we need `then()` to handle the result.
 
 ```
-export default class App extends Vue {
-    films: Film[] = []
-    created(){
-        this.getStarWarsData().then(data => {
-            console.log("json has loaded!")
-            this.films = data.results
-        })
-    }
-    async getStarWarsData() {
-        let res = await fetch("https://swapi.co/api/films/")
-        return await res.json()
-    }
+created(){
+    this.getStarWarsData().then(data => {
+        let films:Films[] = data.results
+        console.log("The first title is " + films[0].title)
+    })
+}
+
+async getStarWarsData() {
+    let res = await fetch("https://swapi.co/api/films/")
+    return await res.json()
 }
 ```
 
@@ -64,7 +49,6 @@ We can send headers and POST data with `fetch` as well!
 ```
 export default class App extends Vue {
     async getWebserviceData() {
-    
         const myHeaders:Headers= new Headers({
               'Content-Type': 'application/json'
         })
@@ -72,7 +56,7 @@ export default class App extends Vue {
         const myInit:RequestInit = { method: 'GET',
                     headers: myHeaders,
                     mode: 'cors',
-                    cache: 'default' }
+                    cache: 'default' };
 
         const url = "your webservice url here"
 
@@ -83,7 +67,7 @@ export default class App extends Vue {
 ```
 ## Checking loaded data in the Chrome plugin
 
-Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) to quickly check what data is available in your Vue app.
+Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) to check the state of your component.
 
 ![state](./state.png)
 
@@ -93,11 +77,7 @@ If we assign the JSON to a reactive array, we can automatically populate the UI.
 
 In this example Vue will render a `<div>` for every film in our Films array. The variable `f` will contain one film.
 ```
-<template>
-    <div>
-        <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
-    </div>
-</template>
+<div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
 ```
 *note that Vue wants us to supply a key. This should be a unique value, for example the movie's id*
 
@@ -110,7 +90,6 @@ Note that the variable that holds the Star Wars JSON is an array of type `Film`.
 *Check the `starwars.d.ts` file to see how you can declare types for your own RESTful API data.*
 
 ## Reading List
-
 - [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [Using headers with fetch](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - [MDN docs async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
