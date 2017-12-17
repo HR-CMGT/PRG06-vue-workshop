@@ -101,6 +101,9 @@ export default class Card extends Vue {
     movietitle: string;
 }
 ```
+When sending a variable, instead of a literal string or number, you type `:` before the prop name.
+
+`<card :movietitle="title"></card>`
 
 ### Sending the movie object
 
