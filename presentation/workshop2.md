@@ -154,13 +154,19 @@ Because a prop is bound to the parent, you should not try to alter a movie's det
 
 ## Events
 
-Since Vue components have no knowledge of their surroundings, events are the way for a component to respond to what happens in the application. In this example, the App component uses `v-on` to listen to a `movieclicked` event from the Card component.
+Since Vue components have no knowledge of their surroundings, events are the way for a component to respond to what happens in the application. In this example, the App component uses `v-on` to listen to a `movieclicked` event from the Card component. If that event happens, the `addToList` method will be called.
 
 APP.VUE
 ```
-<card v-on:movieclicked="addToList(index)"></card>
+<card v-on:movieclicked="addToList"></card>
+
+export default class App extends Vue {
+    addToList(){
+        console.log("a card was clicked")
+    }
+}
 ```
-Now, the card component uses `$emit` to send the `movieclicked` event:
+In the Card component we can use `$emit` to send the `movieclicked` event. In this case, we emit this event after a button in Card has been clicked.
 
 CARD.VUE
 ```
