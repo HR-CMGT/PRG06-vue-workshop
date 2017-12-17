@@ -227,7 +227,6 @@ WATCHLATER.VUE
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator"
-import DataLoader from "../services/DataLoader"
 
 @Component
 export default class Watchlist extends Vue {
