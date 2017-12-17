@@ -17,7 +17,6 @@ Follow the [installation guide](./presentation/install.md)
 - Reactive data
 - Loading JSON
 - Clicks and conditionals
-- Styles
 
 ## Part 2
 
@@ -215,45 +214,11 @@ If you followed the JSON tutorial, you now have JSON data containing Star Wars m
         </div>
     </div>
 </template>
-
-export default class App extends Vue {
-    films: Film[] = []
-    loadData(){
-        // load json data and place it in this.films
-    }
-}
 ```
-## Styles
-
-In the previous example, the loading button is still clickable while the app is busy loading JSON. Let's see if we can disable the button when data is already loading. 
-
-We'll bind a `disabled` CSS class to the button when the `isLoading` status is true.
-```
-<template>
-    <div>
-        <button :class="{ disabled: isLoading }" @click='loadMovies'>Load movies</button>
-    </div>
-</template>
-
-<script lang="ts">
-export default class App extends Vue {
-    isLoading: boolean = false
-}
-</script>
-<style scoped>
-.disabled {
-    pointer-events: none;
-    opacity: 0.4;
-}
-</style>
-```
-Now you can set the `isLoading` variable to true when `fetch` is called, and to false again when loading has finished. The style of the button should automatically update. See if you can add this code yourself!
 
 ## Vue Workshop part 2
 
-Congratulations! We have built a Vue component with data binding, button clicks and dynamic styles!
-
-In [part two](./presentation/workshop2.md) we are going to look at how to use multiple components, and how they communicate with each other.
+Congratulations! We have learned the basics of creating a Vue component!, in [part two](./presentation/workshop2.md) we are going to look at how to use multiple components, and how they communicate.
 
 ## Reading List
 

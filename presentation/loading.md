@@ -25,21 +25,24 @@ async getStarWarsData() {
     return await promise.json()
 }
 ```
-## Example
+## Example Vue Component
 
 Because an async function returns a Promise, we need `then()` to handle the result.
 
 ```
-created(){
-    this.getStarWarsData().then(data => {
-        let films:Films[] = data.results
-        console.log("The first title is " + films[0].title)
-    })
-}
+export default class Card extends Vue {
+    films:Film[] = film[]
+    created(){
+        this.getStarWarsData().then(data => {
+            this.films = data.results
+            console.log("The first title is " + this.films[0].title)
+        })
+    }
 
-async getStarWarsData() {
-    let res = await fetch("https://swapi.co/api/films/")
-    return await res.json()
+    async getStarWarsData() {
+        let res = await fetch("https://swapi.co/api/films/")
+        return await res.json()
+    }
 }
 ```
 
@@ -73,9 +76,7 @@ Use the [Chrome Vue plugin](https://chrome.google.com/webstore/detail/vuejs-devt
 
 ## Displaying data
 
-If we assign the JSON to a reactive array, we can automatically populate the UI. You can bind array values to a repeating DOM element with `v-for`. 
-
-In this example Vue will render a `<div>` for every film in our Films array. The variable `f` will contain one film.
+If we assign the JSON to a reactive array, we can automatically populate the UI. You can bind array values to a repeating DOM element with `v-for`. In this example Vue will render a `<div>` for every film in our Films array. The variable `f` will contain one film.
 ```
 <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
 ```
@@ -83,7 +84,7 @@ In this example Vue will render a `<div>` for every film in our Films array. The
 
 ## JSON Type definitions
 
-Note that the variable that holds the Star Wars JSON is an array of type `Film`. We have defined this type in a `.d.ts` file. VS Code will give you code completion for known types. 
+Note that the variable that holds the Star Wars JSON is an array of type `Film`. We have defined this type in `starwars.d.ts`. VS Code will give you code completion for known types. 
 
 ![actors](dts.png)
 

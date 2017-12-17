@@ -1,18 +1,57 @@
 <template>
     <div>
-        <div><h2>{{ title }}</h2></div>
+        <!-- TODO show the navigation component -->
+        <div>Load the navigation component here</div>
+
+        <!-- TODO place these divs in the card component, and pass the movie as a prop -->
+        <div class="card" v-for="f in films" :key="f.episode_id">
+            <h3>{{f.title}}</h3>
+            <p>{{f.director}}, {{f.release_date}}</p>
+            <p>{{f.opening_crawl}}</p>
+        </div>
+
+        <!-- TODO show the watchlist component. use "v-if" to show it ONLY if there are movies in watchlater -->
+        <div>Watchlist</div>
         
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import Navigation from "./navigation.vue"
 
-@Component
+@Component({
+    components: {Navigation}
+})
+
 export default class App extends Vue {
-    title: string = "Star Wars Movies"
+    films: Film[] = []
+    watchlater: Film[] = []
     created(){
-        console.log("hi!")
+        this.getStarWarsData().then(data => {
+            // place data.results in this.films
+        })
+    }
+
+    async getStarWarsData() {
+        let res = await fetch("https://swapi.co/api/films/")
+        return await res.json()
+    }
+    logTodoList(){
+        console.log("let's start the workshop!")
+        // step 1
+        // load json into this.films
+        // show a div for each film
+        // step 2
+        // register and load the navigation component
+        // step 3
+        // register and load a card component, and show a card for each film in the array. 
+        // use props to send the movie data to the card!
+        // step 4
+        // make the cards clickable. card can send an event to app! a click adds the movie to the watchlist array in app
+        // step 5
+        // register and load the watchlist component. only show it if the watchlist has more than 0 items
+        // the watchlist has a prop for the movies in watchlater, and a click in the watchlist removes that movie from the watchlater array in app
     }
 }
 </script>
@@ -20,28 +59,29 @@ export default class App extends Vue {
 <style>
 body {
     font-family: sans-serif;
-    background-color: #ccc;
-    margin:0px; padding:10px;
+    background: linear-gradient(#E64B8C, #95BFD8);
+    margin:0px; padding:0px;
+}
+
+html {
+    min-height: 100%;
+}
+
+h1, h2, h3, h4 {
+    margin-top:0px;
+	font-family: 'Audiowide', cursive;
 }
 
 div {
     box-sizing: border-box;
 }
 
-button {
-    font-size:1.8em;
-    margin:5px;
-    cursor: pointer;
+.cards {
+    width:100vw;
+    display:flex;
+    flex-wrap: wrap;  /*cards can go to the next line*/
 }
-
-.disabled {
-    pointer-events: none;
-    opacity: 0.4;
-}
-
-.card {
-    background-color:white;
-    padding:10px; margin-bottom:10px;
-    border-radius:6px;
+.columns {
+    display:flex;
 }
 </style>

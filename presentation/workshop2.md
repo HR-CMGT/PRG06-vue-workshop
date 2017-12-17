@@ -6,13 +6,38 @@ This is part 2 of the Vue workshop. Please follow [part 1](../README.md) first! 
 - Props 
 - Events
 
-## Child components
+## Registering child components
+
+Let's practice adding a component. This project contains `Navigation.vue`. To use this component, we can either register it globally (in `index.ts`), or locally, in the component where we need it. We need Navigation in App, so let's register it there. Don't forget to `import` it first.
+
+APP.VUE
+```
+import { Vue, Component, Prop } from "vue-property-decorator"
+import Navigation from "./navigation.vue"
+
+@Component({
+    components: {Navigation}
+})
+
+export default class App extends Vue {
+ ...
+}
+```
+Now we can add the Navigation component to our template!
+```
+<template>
+    <div>
+        <navigation></navigation>
+    </div>
+</template>
+```
+
+## The card component
 
 When looping through the `films` array at the end of part 1, we ended up with the following template:
 ```
 <template>
     <div>
-        <div><h2>{{ title }}</h2></div>
         <div class="card" v-for="f in films" :key="f.episode_id">
             <h3>{{f.title}}</h3>
             <p>{{f.director}}, {{f.release_date}}</p>
@@ -21,93 +46,46 @@ When looping through the `films` array at the end of part 1, we ended up with th
     </div>
 </template>
 ```
-Let's start by removing all the movie detail HTML and replace it with `<card>`. The card will hold all the detail HTML.
+Let's start by moving all the movie detail HTML from App.vue to Card.vue. Replace the divs with a single `<card>`. 
+
+**App.vue**
+
 ```
 <template>
     <div>
-        <div><h2>{{ title }}</h2></div>
-        <card></card>
+        <card v-for="f in films" :key="f.episode_id"></card>
     </div>
 </template>
 ```
-## The card component
-
-Create a `Card.vue` file:
 
 **Card.vue**
 
 ```
 <template>
     <div>
-        <h3>I am a card!</h3>
+        <div class="card" v-for="f in films" :key="f.episode_id">
+            <h3>{{f.title}}</h3>
+            <p>{{f.director}}, {{f.release_date}}</p>
+            <p>{{f.opening_crawl}}</p>
+        </div>
     </div>
 </template>
-
-<script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
-
-@Component
-export default class Card extends Vue {
-    created(){
-        console.log("Card is created!")
-    }
-}
-</script>
-
-<style scoped>
-</style>
 ```
+To use the Card component in the App.vue, you can follow the same steps as we did with the Navigation component: use `import` and `@Component` to register the Card component!
 
-## Importing the Card component
+## Props
 
-To use the Card component in the main App, we'll need to:
-- `import` the card component. 
-- use the `@component` decorator to *register* Card as a Vue component
-- use `<card></card>` in our template!
+If you try to run `webpack` now, you will get an error. The Card tries to display movie data, but the movie data is not available in the Card component! So let's pass data from App to Card. This is done using **props**. A prop is a variable that you pass from a parent container to a child. In the following example we pass a string to the child component:
 
-**App.vue**
+### Example
 
-```
-<template>
-    <div>   
-        <h2>Vue app</h2>
-        <card></card> 
-    </div>   
-</template>
-
-<script lang="ts">
-    import { Vue, Component, Prop } from "vue-property-decorator"
-    import Card from "./card.vue"
-
-    @Component({
-        components: {Card}
-    })
-
-    export default class App extends Vue {
-        // app code here
-    }
-</script>
-
-<style>
-</style>
-```
-### Does it run?
-
-Check your browser and see if the child component is correctly loaded!
-
-## Passing data to a child component
-
-We want our card to display movie details, so let's pass some data from App to Card. This is done using **props**.
-
-**App.vue**
-
-We'll start by passing the literal string "The Force Awakens" to the card:
+**Parent**
 
 `<card movietitle="The Force Awakens"></card>`
 
-**Card.vue**
+**Child**
 
-The card component needs to know that the parent is sending a variable (a *Prop*). We do this by typing `@Prop()` before the variable declaration:
+Props are declared by typing `@Prop()` before the variable declaration:
 
 ```
 <template>
@@ -117,35 +95,24 @@ The card component needs to know that the parent is sending a variable (a *Prop*
 </template>
 @Component
 export default class Card extends Vue {
-    @Prop() movietitle: string;
+    @Prop() 
+    movietitle: string;
 }
 ```
 
-Again, check if this runs in your browser!
+### Sending the movie object
 
-We might not want to pass "The Force Awakens" to every card component. We can use `v-bind:movietitle`, or the shortcut `:movietitle` to pass a variable. In this case, `title` is a variable on `App.vue`.
+Now we are ready to send the whole movie object as a prop:
 
-`<card :movietitle="title"></card>`
+APP.VUE
 
-### Displaying a Card for each movie
+```
+<card v-for="f in films" :key="f.episode_id" :movie="f"></card>
+```
 
-In part 1 we used `v-for` to display a `<div>` for each movie. This works for components too. 
+Now, Card can display all movie details from inside the card component. Note that `movie` is a `@Prop()`.
 
-`<card v-for="f in films" :key="f.episode_id" :movietitle="f.title"></card>`
-
-This should display a list of cards with all titles from the Star Wars movies! Check if it runs in your browser 👨🏼‍💻
-
-### Passing an entire object
-
-Instead of passing just the movie title, we might as well pass the entire movie object. 
-
-**App.vue**
-
-`<card v-for="f in films" :key="f.episode_id" :movie="f"></card>`
-
-Now, we can display all movie details from inside the card component. Note that `movie` is a `@Prop()`.
-
-**Card.vue**
+CARD.VUE
 ```
 <template>
     <div class="card">
