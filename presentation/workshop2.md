@@ -77,7 +77,7 @@ To use the Card component in the App.vue, you can follow the same steps as we di
 
 ## Props
 
-If you try to run `webpack` now, you will get an error. The Card tries to display movie data, but the movie data is not available in the Card component! So let's pass data from App to Card. This is done using **props**. A prop is a variable that you pass from a parent container to a child. In the following example we pass a string to the child component:
+If you try to run `webpack` now, you will get an error. The Card tries to display movie data, but the movie data is not available in the Card component! So let's pass data from App to Card. This is done using **props**. A prop is a parent variable that is displayed by a child.
 
 ### Example
 
