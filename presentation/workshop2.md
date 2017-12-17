@@ -5,6 +5,8 @@ This is part 2 of the Vue workshop. Please follow [part 1](../README.md) first! 
 - Child components
 - Props 
 - Events
+- Code outside of components
+- Where to go next
 
 ## Registering child components
 
@@ -144,7 +146,7 @@ If everything went well, your Chrome Debugger should look like this:
 
 ![debug2](./debug2.png)
 
-## Props are reactive
+## Props are reactive !
 
 A prop is a variable that is maintained by the parent, not by the child. In the above exercise, the list of movies is maintained by `App.vue` and displayed by `Card.vue`. If the array in `App.vue` changes, all cards will be automatically updated!
 
@@ -231,8 +233,7 @@ export default class Watchlist extends Vue {
 </script>
 ```
 
-
-## Not everything is part of the UI
+## Code outside of a component
 
 Not all logic of your app has to be inside a UI component. You can create standalone `.ts` classes for other logic, so that you can reuse that logic across all your components. In this example we create a calculator that we can `import` anywhere:
 
@@ -278,7 +279,59 @@ export default class App extends Vue {
     }
 }
 ```
-[Read more about working with import and export](https://www.typescriptlang.org/docs/handbook/modules.html)
+
+### BONUS! Loading GIPHY images
+
+Now that we have a dataloader, we can add methods to it to be used by our entire app. This example calls the GIPHY search engine, which returns an array of GIF urls. We then check if there is a proper url and return that.
+
+DATALOADER.TS
+```
+export default class DataLoader {
+
+    static async loadImage(img: string): Promise<any> {
+        let url = `http://api.giphy.com/v1/gifs/search?q=${encodeURIComponent(img)}&api_key=dc6zaTOxFJmzC`
+        let res = await fetch(url)
+        let json = await res.json()
+        return await DataLoader.checkData(json)
+    }
+
+    static async checkData(json: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (json.data.length == 0) {
+                reject("No gif found!")
+            } else {
+                let ind:number = Math.floor(Math.random()*json.data.length)
+                let gifurl: string = json.data[ind].images.fixed_height.url;
+                resolve(gifurl);
+            }
+        })
+    }
+}
+```
+CARD.TS
+```
+<template>
+    <div :style="{backgroundImage:headerImage}"></div>
+</template>
+
+<script lang="ts">
+import DataLoader from "../services/DataLoader"
+
+@Component
+export default class Card extends Vue {
+    headerImage:string = ""
+    created(){
+        DataLoader.loadImage(this.movie.title).then(gifurl => { 
+            this.headerImage = `url('${gifurl}')`
+        })
+    }
+}
+</script>
+```
+
+# Where to go next
+
+There's a lot to Vue we haven't touched yet!
 
 ## Dynamic components
 

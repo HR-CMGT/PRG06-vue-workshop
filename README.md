@@ -228,6 +228,7 @@ Congratulations! We have learned the basics of creating a Vue component!, in [pa
 - [Single File Components](https://vuejs.org/v2/guide/single-file-components.html)
 - [Typescript support](https://vuejs.org/v2/guide/typescript.html)
 - [Class Component](https://github.com/vuejs/vue-class-component)
+- [Working with import and export](https://www.typescriptlang.org/docs/handbook/modules.html)
 
 ### Tutorials and examples
 
