@@ -101,6 +101,9 @@ export default class Card extends Vue {
     movietitle: string;
 }
 ```
+When sending a variable, instead of a literal string or number, you type `:` before the prop name.
+
+`<card :movietitle="title"></card>`
 
 ### Sending the movie object
 
@@ -186,7 +189,7 @@ We are going to build a new `Watchlist` component, that displays movies that we 
 APP.VUE
 ```
 // show a card for every movie in the array
-<card v-for="(f,index) in films" :key="f.episode_id" :movie="f" :display="gridstyle" v-on:movieclicked="addToList(index)"></card>
+<card v-for="(f,index) in films" :key="f.episode_id" :movie="f" v-on:movieclicked="addToList(index)"></card>
 
 // show the watchlist component only if the watchlater array is not empty
 <watchlist v-if="watchlater.length > 0" :watchlater="watchlater" v-on:listitemclicked="removeFromList"></watchlist>
