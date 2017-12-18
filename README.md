@@ -220,6 +220,10 @@ If you followed the JSON tutorial, you now have JSON data containing Star Wars m
 
 Congratulations! We have learned the basics of creating a Vue component!, in [part two](./presentation/workshop2.md) we are going to look at how to use multiple components, and how they communicate.
 
+## Finished workshop files
+
+The finished workshop components can be found in the `finished` folder.
+
 ## Reading List
 
 ### Documentation
