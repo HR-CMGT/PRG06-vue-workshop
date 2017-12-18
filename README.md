@@ -222,7 +222,7 @@ Congratulations! We have learned the basics of creating a Vue component!, in [pa
 
 ## Finished workshop files
 
-The finished workshop components can be found in the `finished` folder.
+The finished workshop files can be found in [Vue Workshop Finished](https://github.com/HR-CMGT/vue-workshop-finished).
 
 ## Reading List
 
