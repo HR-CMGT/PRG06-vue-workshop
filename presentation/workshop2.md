@@ -334,6 +334,10 @@ export default class Card extends Vue {
 </script>
 ```
 
+# Finished workshop files
+
+The finished workshop components can be found in the `finished` folder.
+
 # Where to go next
 
 There's a lot to Vue we haven't touched yet!

@@ -39,6 +39,7 @@ export default class App extends Vue {
     }
     logTodoList(){
         console.log("let's start the workshop!")
+        // FINISHED WORKSHOP COMPONENTS ARE IN THE FINISHED FOLDER
         // step 1
         // load json into this.films
         // show a div for each film

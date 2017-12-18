@@ -233,6 +233,7 @@ Congratulations! We have learned the basics of creating a Vue component!, in [pa
 ### Tutorials and examples
 
 - [5 practical examples for learning Vue.js](https://tutorialzine.com/2016/03/5-practical-examples-for-learning-vue-js)
+- [This year's top Vue tutorials](https://reactdom.com/blog/vuejs-books)
 - [Vue courses on egghead.io](https://egghead.io/browse/frameworks/vue)
 - [Using Class Component with Typescript](https://alligator.io/vuejs/typescript-class-components/)
 - [Huge list of Vue Examples and readymade components](https://github.com/vuejs/awesome-vue)
