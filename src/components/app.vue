@@ -28,15 +28,14 @@ export default class App extends Vue {
     films: Film[] = []
     watchlater: Film[] = []
     created(){
-        this.getStarWarsData().then(data => {
-            // place data.results in this.films
-        })
+        this.getStarWarsData()
     }
 
     async getStarWarsData() {
         let res = await fetch("https://swapi.co/api/films/")
-        return await res.json()
+        this.films = (await res.json()).results
     }
+
     logTodoList(){
         console.log("let's start the workshop!")
         // FINISHED WORKSHOP COMPONENTS ARE IN THE FINISHED FOLDER

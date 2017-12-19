@@ -1,10 +1,8 @@
 # Working with JSON data
 
+ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method is **asynchronous**, which means that we don't know when it will return data. To handle results from asynchronous functions, we can use **Promises** or **Async Await** syntax.
+
 ## Promises
-
-ES6 introduced the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) method to load external data. The fetch method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
-
-`let promise = fetch(url)`
 
 A **Promise** object allows us to define code that will be executed *once the data has loaded*. Place this code in a `then()` call.
 ```
@@ -12,19 +10,24 @@ function getStarWarsData() {
     fetch('http://swapi.co/api/people/1/')
         .then(res => res.json())
         .then(res => {
-            console.log("data is ready!" + res)
+            this.films = res
         })
 }
 ```
 ## Async await
 
-[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that makes asynchronous methods more readable:
+[Async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is a new syntax that makes asynchronous methods more readable.
+In this example, the variable `this.films` will be filled once the API call has returned a result!
+
 ```
 async getStarWarsData() {
-    let promise = await fetch("https://swapi.co/api/films/")
-    return await promise.json()
+    let res = await fetch("https://swapi.co/api/films/")
+    this.films = await res.json()
 }
 ```
+
+*note: in the case of the star wars API, the actual movies are in res.results, so you have to type: `this.films = (await res.json()).results`*
+
 ## Example Vue Component
 
 Because an async function returns a Promise, we need `then()` to handle the result.
@@ -95,3 +98,4 @@ Note that the variable that holds the Star Wars JSON is an array of type `Film`.
 - [Using headers with fetch](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 - [MDN docs async await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 - [Why async await is better than Promises](https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9)
+- [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
