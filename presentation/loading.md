@@ -10,7 +10,7 @@ function getStarWarsData() {
     fetch('http://swapi.co/api/people/1/')
         .then(res => res.json())
         .then(res => {
-            this.films = res
+            this.data = res
         })
 }
 ```
@@ -22,32 +22,34 @@ In this example, the variable `this.films` will be filled once the API call has 
 ```
 async getStarWarsData() {
     let res = await fetch("https://swapi.co/api/films/")
-    this.films = await res.json()
+    this.data = await res.json()
 }
 ```
 
-*note: in the case of the star wars API, the actual movies are in res.results, so you have to type: `this.films = (await res.json()).results`*
-
 ## Example Vue Component
 
-Because an async function returns a Promise, we need `then()` to handle the result.
+Here we call the async function as soon as the Vue component is created. The films array will be filled once the JSON has finished loading. That will automatically render the `<div>` elements in our HTML template!
 
 ```
+<template>
+    <div>
+        <div v-for="f in films" :key="f.episode_id">{{f.title}}</div>
+    </div>
+</template>
+
 export default class Card extends Vue {
     films:Film[] = film[]
     created(){
-        this.getStarWarsData().then(data => {
-            this.films = data.results
-            console.log("The first title is " + this.films[0].title)
-        })
+        this.getStarWarsData()
     }
 
     async getStarWarsData() {
         let res = await fetch("https://swapi.co/api/films/")
-        return await res.json()
+        this.films = (await res.json()).results
     }
 }
 ```
+*note: in the case of the star wars API, the actual movies are in res.results, so you have to type: `this.films = (await res.json()).results`*
 
 ## Sending headers
 
